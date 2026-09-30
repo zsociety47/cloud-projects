@@ -23,7 +23,7 @@ Mermaid is a text-based diagram format that GitHub renders as a real picture aut
 1. **Two paths, two line styles.**
    - Solid arrow = the **request path** (how a user reaches the app).
    - Dashed arrow = the **deploy path** (how code gets to Azure).
-2. **Boundaries are boxes.** Draw the subscription, resource group, and (later) virtual network as labeled containers, outermost to innermost.
+2. **Boundaries are boxes.** Draw the Microsoft Entra ID tenant, subscription, resource group, and (later) virtual network as labeled containers, outermost to innermost. Identities such as app registrations sit in the tenant, outside the subscription.
 3. **Three colors only.**
    - Azure resources: Azure blue `#0078d4`, white text
    - External systems (GitHub, users, third-party APIs): neutral gray `#6e7681`, white text
@@ -56,23 +56,25 @@ Copy this, then rename nodes for the new project.
 
 ```mermaid
 flowchart LR
-    user["User's browser"]
+    user["Visitor's browser"]
     dev["git push to main"]
     gha["GitHub Actions<br/>workflow"]
 
-    subgraph sub["Azure subscription"]
-        entra["Entra ID<br/>federated credential"]
-        subgraph rg["rg-staticweb-poc-eus"]
-            subgraph st["ststaticwebpoc01 · Storage Account"]
-                web["$web container<br/>index.html · 404.html"]
+    subgraph tenant["Microsoft Entra ID tenant"]
+        entra["github-actions-my-repo<br/>App registration · federated credential"]
+        subgraph sub["Azure subscription"]
+            subgraph rg["rg-staticweb-poc-eus"]
+                subgraph st["ststaticwebpoc01 · Storage Account"]
+                    web["$web container<br/>index.html · 404.html"]
+                end
             end
         end
     end
 
     user -- "HTTPS" --> web
-    dev -.-> gha
+    dev -. "starts workflow" .-> gha
     gha -. "OpenID Connect token" .-> entra
-    gha -. "blob upload" .-> web
+    gha -. "blob upload · data role only" .-> web
 
     classDef azure fill:#0078d4,stroke:#005a9e,color:#fff
     classDef external fill:#6e7681,stroke:#484f58,color:#fff
