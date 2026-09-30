@@ -10,7 +10,7 @@ Every project follows the shared standards in [`/standards`](standards/).
 
 | # | Project | What it proves | Walkthrough | Status |
 |---|---------|----------------|-------------|--------|
-| 1 | [Static Website on Blob Storage](https://github.com/zsociety47/azure-static-website-poc) | A static site can be hosted on Azure Storage and deployed from GitHub Actions with no stored credentials | [Loom](LOOM_LINK_HERE) | In progress |
+| 1 | [Static Website on Blob Storage](https://github.com/zsociety47/azure-static-website-poc) | A static site can be hosted on Azure Storage and deployed from GitHub Actions with no stored credentials | [Loom](https://www.loom.com/share/56b36c39bfb84152828e7ee3ad1f6cc7) | Complete |
 | 2 | Coming soon | | | Planned |
 | 3 | Coming soon | | | Planned |
 | 4 | Coming soon | | | Planned |
