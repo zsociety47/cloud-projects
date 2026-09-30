@@ -31,6 +31,7 @@ Every project follows the shared standards in [`/standards`](standards/).
 
 - [Architecture Diagram Standard](standards/DIAGRAM-STANDARD.md): tools, colors, line styles, and checklist used for every diagram
 - [Project README Template](standards/README-TEMPLATE.md): video first, then step-by-step instructions with screenshots, then the technical detail
+- [LinkedIn post strategy](standards/LINKEDIN-POSTS.md): four posts per project (video, repository, architecture, one tool) and the video recording guide
 
 ## About
 
