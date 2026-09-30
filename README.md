@@ -30,6 +30,7 @@ Every project follows the shared standards in [`/standards`](standards/).
 ## Standards
 
 - [Architecture Diagram Standard](standards/DIAGRAM-STANDARD.md): tools, colors, line styles, and checklist used for every diagram
+- [Project README Template](standards/README-TEMPLATE.md): video first, then step-by-step instructions with screenshots, then the technical detail
 
 ## About
 
