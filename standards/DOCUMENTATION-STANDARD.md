@@ -22,9 +22,11 @@ Public repo:
 - `.gitignore` covering keys, `.env`, virtual environments and state files
 - Python projects: `requirements.txt` with pinned versions, and setup steps in the README
 
-Private repo `loom-notes/`:
-- `NN-<project>.md`: video script (from `VIDEO-SCRIPT-TEMPLATE.md`), a "Screenshots to capture" shot list, and the LinkedIn post drafts
-- `NN-<project>-findings.md`: the running log from section 7
+Private repo `loom-notes/`, grouped by project:
+
+- `scripts/NN-<project>/script.md`: video script from `VIDEO-SCRIPT-TEMPLATE.md`, including the shot list
+- `notes/NN-<project>/findings.md`: the running log from section 7
+- `linkedin/NN-<project>/`: the LinkedIn post drafts (`01-video.md`, `02-github.md`, `03-architecture.md`, `04-tool.md`)
 
 LinkedIn drafts stay in `loom-notes` (private), never in the public repo.
 
