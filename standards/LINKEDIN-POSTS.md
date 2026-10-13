@@ -15,9 +15,11 @@ Audience: mid-level cloud and DevOps practitioners and hiring managers. Tone: st
 ## Four posts
 
 1. **Video.** Upload the raw video file to LinkedIn (never a Loom link). Thumbnail: still frame from the video with short overlay text, 1920×1080 PNG.
-2. **GitHub.** Screenshot of the repo (file structure or README). Repo link in the body.
-3. **Architecture.** The diagram, following [DIAGRAM-STANDARD.md](DIAGRAM-STANDARD.md).
-4. **Tool.** One tool from the project. Visual is a logo, screenshot, or terminal output.
+2. **GitHub.** Repo link in the body. Attach `02-github.jpg` next to the draft (public GitHub image).
+3. **Architecture.** Attach `03-architecture.jpg` (export of our diagram, following [DIAGRAM-STANDARD.md](DIAGRAM-STANDARD.md)).
+4. **Tool.** Attach `04-tool.jpg` (public image of that tool).
+
+Drafts and JPEGs live as matching pairs in the private `loom-notes/linkedin/<project>/` folder. Shared originals live in `loom-notes/linkedin/images/`. When LinkedIn asks for a file, pick the JPEG with the same number as the markdown.
 
 Optional fifth post only if the project has another strong angle.
 
