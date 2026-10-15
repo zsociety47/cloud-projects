@@ -67,6 +67,18 @@ If the video was recorded before a README restructure, add a one-line note under
 - Do not reconstruct the findings from memory at the end. Gotchas found during the build are the content that makes the project credible.
 - At the end of each phase, update the README step for that phase and mark which screenshots are still needed.
 
+## 7c. Compared with the previous project
+
+After the design lock of each new project, write a private comparison in `loom-notes/notes/compared-across-projects.md` and a short pointer in that project's `findings.md`. Cover:
+
+1. **The idea.** What the previous project still forced you to run or trust, and what this one hands to the platform.
+2. **Architecture.** Compute, data store, how access is granted, where secrets live, regions, number of machines.
+3. **Automation.** What reused the previous skeleton (`config`, clients, helpers, deploy / verify / teardown), which new clients or guest files appeared, and any change to deploy order.
+4. **Verify.** How the pass table changed, especially the blocked-on-purpose row.
+5. **Teardown.** Anything beyond deleting the resource group.
+
+The public README stays self-contained. It does not say "previous project" or use the word lab.
+
 ## 7b. Video script
 - Every project gets a video script written from `standards/VIDEO-SCRIPT-TEMPLATE.md` before recording, stored in `loom-notes/`.
 - The script follows the recording guide: face on camera throughout; intro (name, what I'm building, business problem, within 30 seconds); middle by flow (A: build live under 15 minutes; B: build off-camera, then walk through the finished architecture); outro (business use case, what I'd change).

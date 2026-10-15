@@ -40,5 +40,4 @@ The intro sets the business context, the middle proves you can execute, the outr
 
 ## Publishing
 
-- 8:00 AM Eastern, one post per weekday
-- After publishing: engage with three recent posts under a specific hashtag; leave a useful comment on at least two
+- 9:00 AM Eastern, Monday through Thursday, one post per day. Friday is a rest day.
