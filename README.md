@@ -14,8 +14,8 @@ Every project follows the shared standards in [`/standards`](standards/).
 | 2 | [Secure Two-Tier Web Application on Azure](https://github.com/zsociety47/azure-two-tier-network-poc) | A database with no public IP address is reachable only from the web tier | [Loom](https://www.loom.com/share/3627b9267eff4235b9f635ca752d191c) | Complete |
 | 3 | [Managed SQL and Key Vault on Azure](https://github.com/zsociety47/azure-sql-keyvault-poc) | An app VM reads its database password from Key Vault with a managed identity, and its role cannot write secrets | [Loom](https://www.loom.com/share/326b50f1396142d9848704c6918908b5) | Complete |
 | 4 | [Infrastructure as Code with Terraform on Azure](https://github.com/zsociety47/azure-terraform-iac-poc) | A virtual network can be described in Terraform, gain a firewall after it already exists, and be removed with one command | [Loom](https://www.loom.com/share/b0448fef104a4bdc90a3d7c63cad2014) | Complete |
-| 5 | Coming soon | | | Planned |
-| 6 | Coming soon | | | Planned |
+| 5 | [Governance guardrails on Azure](https://github.com/zsociety47/azure-governance-poc) | A reader is limited to one resource group, policy blocks an oversized virtual machine before it is created, and a budget alerts as spend nears the monthly limit | Pending | In progress |
+| 6 | [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc) | A pull request plans and tests a Terraform change, and only the main branch can apply it, with no Azure password stored in GitHub | Pending | In progress |
 
 ## Google Cloud
 
