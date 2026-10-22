@@ -4,6 +4,10 @@ Hands-on cloud engineering projects, each built as a proof of concept: a stated 
 
 Every project follows the shared standards in [`/standards`](standards/).
 
+## Roadmap
+
+Azure first, then the same six projects rebuilt on Google Cloud and AWS, each one better than the last time. After that: a landing-zone series, a Kubernetes series, and more Azure projects. [Full roadmap](ROADMAP.md).
+
 ---
 
 ## Azure
