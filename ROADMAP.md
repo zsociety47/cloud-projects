@@ -36,7 +36,7 @@ Tools by project: Bash first, then Python for projects 2 and 3, then Terraform f
 | Series | What it is | Status |
 |---|---|---|
 | **Landing zone** | Projects that stack on each other into one environment: network, identity, policy, logging, and shared services. One per cloud: Azure landing zone, Google Cloud landing zone, AWS landing zone | Planned |
-| **Kubernetes** | Two parts. Part 1 is a basic event ticketing platform as a small first version, deployed with Helm on a managed cluster. Part 2 splits it into services (forecasting, fraud detection, an organizer assistant, notifications, search) with a Helm chart each, and moves one service to a second cloud | Planned |
+| **Kubernetes** | Two parts. Part 1 is a basic event ticketing platform for in-person and virtual events, as a small first version, deployed with Helm on a managed cluster. Part 2 splits it into services (forecasting, fraud detection, an organizer assistant, notifications, search) with a Helm chart each, and moves one service to a second cloud | Planned |
 | **More Azure projects** | Further Azure proofs of concept beyond the first six | Planned |
 
 ## How each project is recorded
