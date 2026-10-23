@@ -60,7 +60,7 @@ Part of [Cloud Projects](https://github.com/zsociety47/cloud-projects).
 
 ## Automated setup
 
-<Prerequisites, then the scripts, each labelled with the Project Steps it replaces.>
+<Prerequisites, then one heading per action: sign in, init, plan, apply, each direct check, verify, teardown. Under each heading, say what the reader is doing and what they should see before the next command. Do not stack those commands in one block.>
 
 ---
 
