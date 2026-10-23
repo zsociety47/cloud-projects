@@ -1,5 +1,7 @@
 # Video script: <Project name>
 
+**FLOW A: live build on camera (under 15 minutes)**  or  **FLOW B: walkthrough (build off camera first).** Keep exactly one of these two lines, right under the title, so the flow is the first thing you see.
+
 Private file in `loom-notes/`. One per project. Follows the "Lab Video Recording Flows" guide.
 
 ## Setup
