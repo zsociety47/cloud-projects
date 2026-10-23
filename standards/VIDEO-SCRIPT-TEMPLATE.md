@@ -9,7 +9,8 @@ Private file in `loom-notes/`. One per project. Follows the "Lab Video Recording
 - Before recording: environment built and tested, terminal font large, notifications off, secrets and subscription or tenant IDs hidden from the screen, resource group name ready for teardown
 - Upload the raw video file to LinkedIn (not a Loom link); capture a still frame for the thumbnail (1920x1080 PNG, short overlay text)
 
-## Part 1: Intro (0:00 to 0:30, same for every video)
+## Part 1: Intro (about 60 to 75 seconds; name, goal, and problem inside the first 30)
+Follow [COMMUNICATION-STANDARD.md](COMMUNICATION-STANDARD.md). The viewer should be able to answer: who, what, why it matters, how it will be proved.
 Say, in your own words:
 1. Your name and who you are: "Hi, I'm Zeon, a cloud and full-stack engineer."
 2. What you're building in this project.
@@ -28,7 +29,8 @@ Draft: ...
 
 Include the moment of proof: run the verification and show it passing, plus one thing that was blocked on purpose.
 
-## Part 3: Outro (same for every video)
+## Part 3: Outro (about 60 to 75 seconds)
+Follow [COMMUNICATION-STANDARD.md](COMMUNICATION-STANDARD.md): recap, value, honest limit, how to repeat it, what is next.
 Say:
 1. The business use case this solves and why it matters.
 2. What you would change or improve if you did it again.
