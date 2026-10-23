@@ -1,0 +1,74 @@
+# Environment control
+
+The rule: every lab resource is deleted at the end of the day it was made. This folder is the safety net that enforces it. `terraform destroy` stays the normal teardown; `envctl.sh` catches whatever was left behind.
+
+## The tag contract (same on every cloud)
+
+| Tag | Value | Why |
+|---|---|---|
+| `lifetime` | `1d` | The consent to delete. Only groups with this exact tag are ever touched. |
+| `owner` | your name | Who made it. |
+| `project` | the repo name | What it belongs to. |
+| `created` | UTC time, `2026-10-23T14:05:00Z` | Lets the sweep skip anything made in the last hour. A missing `created` counts as old. |
+
+Azure resource groups use tags. Google Cloud projects use labels (lowercase keys and values). AWS uses tags on each resource. The names and values are the same on all three.
+
+Anything you want to keep: do not tag it `lifetime=1d`. Use `lifetime=keep`. The sweep ignores it.
+
+## Terraform snippet
+
+```hcl
+variable "owner" { type = string }
+
+resource "azurerm_resource_group" "main" {
+  name     = "rg-example-zeon01"
+  location = "eastus"
+  tags = {
+    lifetime = "1d"
+    owner    = var.owner
+    project  = "azure-example-poc"
+    created  = formatdate("YYYY-MM-DD'T'hh:mm:ss'Z'", timestamp())
+  }
+  lifecycle {
+    ignore_changes = [tags["created"]]  # timestamp() changes every plan; this keeps the plan clean
+  }
+}
+```
+
+For a group made with the Azure CLI: `az group create ... --tags lifetime=1d owner=zeon project=<repo> created=$(date -u +%FT%TZ)`.
+
+## Use
+
+```bash
+./envctl.sh                 # dry run: lists what it would delete, deletes nothing
+./envctl.sh --apply         # deletes for real
+./envctl.sh --min-age 2     # skip groups younger than 2 hours (default 1)
+./envctl.sh --cloud all     # also reports GCP and AWS
+```
+
+Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscription id, account id, or sign-in name.
+
+## Nightly run on the Mac
+
+```bash
+./install-launchd.sh            # 11:30 PM every night, Azure, --apply
+./install-launchd.sh --remove
+```
+
+Run these on the Mac itself, not from Claude's cloud session (it cannot reach macOS launchd or the Azure CLI). If the Mac is asleep at 11:30 PM, the job runs when it wakes. You must be signed in (`az login`); if you are not, the run logs that and deletes nothing.
+
+## What it does not clean up
+
+A resource group delete does not remove: Entra ID users and app registrations (project 5's test user), subscription-level policies and budgets, or the reserved name of a soft-deleted Key Vault. The script reports the last one; the others still need `terraform destroy`.
+
+## Status by cloud
+
+| Cloud | Status |
+|---|---|
+| Azure | Working (deletes resource groups). Tested offline with a stand-in `az`; first real run is a dry run on the Mac. |
+| Google Cloud | Report only. Gets the project-delete adapter in the GCP round (one project per lab). |
+| AWS | Report only. Gets a tag-sweep or account-per-lab adapter in the AWS round. |
+
+## Test
+
+`./test/test-envctl.sh` runs offline with a fake `az`. It proves a dry run deletes nothing, an apply deletes old and undated groups, and a group made a minute ago is kept.
