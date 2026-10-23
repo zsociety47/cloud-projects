@@ -57,9 +57,18 @@ Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscript
 
 Run these on the Mac itself, not from Claude's cloud session (it cannot reach macOS launchd or the Azure CLI). If the Mac is asleep at 11:30 PM, the job runs when it wakes. You must be signed in (`az login`); if you are not, the run logs that and deletes nothing.
 
-## What it does not clean up
+## What it does not clean up, and the check that watches for it
 
-A resource group delete does not remove: Entra ID users and app registrations (project 5's test user), subscription-level policies and budgets, or the reserved name of a soft-deleted Key Vault. The script reports the last one; the others still need `terraform destroy`.
+Deleting a resource group does not remove Entra users and app registrations, subscription-level policies and budgets, or the reserved names of soft-deleted Key Vaults. Only `terraform destroy` removes the first three.
+
+Every run ends with a leftover check, and `./envctl.sh --check` runs only that. It looks for:
+
+- Terraform state that still lists resources (the sign that `terraform destroy` was not run), under `ENVCTL_PROJECTS_DIR` (default `~/Desktop/azure-mentorship`)
+- Entra users and app registrations whose names match `ENVCTL_ENTRA_MATCH` (default `zeon01|junior-dev`)
+- Policy assignments and budgets with `zeon01` in the name
+- Soft-deleted Key Vaults
+
+If anything is found it prints `WARNING` lines, shows a macOS notification, and exits with code 3, so the nightly log shows it. A clean run says `leftover check: clean` and exits 0.
 
 ## Status by cloud
 

@@ -137,7 +137,16 @@ Rules:
 | Tag values | lowercase | `terraform`, `poc`, `zeon` |
 | Files and folders | lowercase, hyphens, project number first | `04-azure-terraform-iac-poc` |
 
-Standard tag set on every resource group: `project`, `environment`, `managed-by`, `owner`.
+Standard tag set on every resource group, starting with project 6a (required, no exceptions):
+
+| Tag | Value | Why |
+|---|---|---|
+| `lifetime` | `1d` (or `keep` to exempt it from the nightly delete) | Consent for `envctl.sh` to delete the group |
+| `owner` | `zeon` | Who to ask |
+| `project` | the project folder name, for example `06a-azure-terraform-pipeline-poc` | Which project made it |
+| `created` | UTC time written by Terraform, ISO format | Lets the sweep skip groups under one hour old |
+
+`environment` and `managed-by` may still be added, but the four above must always be there. Projects 1 to 5 carry the older set (`project`, `environment`, `managed-by`, `owner`) and are NOT swept at night, so tear them down with `terraform destroy`. The Terraform snippet with `ignore_changes = [tags["created"]]` is in `cloud-projects/environment-control/README.md`. Each project's verify script must check that all four tags exist.
 
 ---
 
@@ -148,4 +157,5 @@ Standard tag set on every resource group: `project`, `environment`, `managed-by`
 - [ ] Is it the shortest name that is still unique where it has to be?
 - [ ] Top-level and globally unique? Add `zeon01`.
 - [ ] No dates, no "lab", nothing that will change?
+- [ ] Does every new resource group carry `lifetime`, `owner`, `project`, and `created`?
 - [ ] Variable written in whole words, ending in its attribute?
