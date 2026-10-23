@@ -2,6 +2,26 @@
 
 The rule: every lab resource is deleted at the end of the day it was made. This folder is the safety net that enforces it. `terraform destroy` stays the normal teardown; `envctl.sh` catches whatever was left behind.
 
+## Quick start (run these on your Mac)
+
+Open the Terminal app on your Mac, not Claude and not Cursor's chat. Cursor's built-in terminal also works. Every command below is run from this folder:
+
+```bash
+cd ~/Desktop/azure-mentorship/cloud-projects/environment-control
+```
+
+Do this once, before you build project 6a:
+
+1. `az login` (sign in to Azure in the browser, then close the tab).
+2. `./envctl.sh` is a dry run. It lists what it would delete and deletes nothing. Read the list.
+3. `./envctl.sh --check` runs only the leftover check. Run it now and after each project. Project 5's Entra test user may still show up as a warning. If it does, run `terraform destroy` in that project folder.
+4. `./install-launchd.sh` turns on the nightly 11:30 PM delete. Run it once. `./install-launchd.sh --remove` turns it off.
+5. If a command says "permission denied", run `chmod +x envctl.sh install-launchd.sh test/test-envctl.sh` once.
+
+Every day after that, the only habit is: tag each new resource group with the four tags, finish with `terraform destroy`, and read any `WARNING` in `~/.environment-control/envctl.log`.
+
+To confirm the script itself works without touching Azure, run `./test/test-envctl.sh`. It uses a fake Azure command.
+
 ## The tag contract (same on every cloud)
 
 | Tag | Value | Why |
