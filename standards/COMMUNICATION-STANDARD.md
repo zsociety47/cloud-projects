@@ -36,7 +36,7 @@ If any answer is missing, add a sentence. Do not cut the answer to hit a time ta
 5. What you would change, and what comes next in the series.
 6. Where the code and the written guide are.
 
-## LinkedIn post (about 900 to 1,500 characters)
+## LinkedIn post (video post about 110 words; every other post about 75 words or fewer)
 
 1. Hook: one or two lines that stand alone.
 2. What it is, in plain words, with any tool explained.
@@ -45,6 +45,8 @@ If any answer is missing, add a sentence. Do not cut the answer to hit a time ta
 5. Why it matters, and an honest limit if there is one.
 6. How to repeat it: what you need.
 7. One real question, then the repository link, then five hashtags.
+
+Length: the video post is the longest and stays near 110 words (about 700 characters). GitHub, architecture, and tool posts stay near 75 words or fewer (about 450 characters), closer to the first two projects' posts. The picture and the video carry the detail; the post gives the hook, one plain explanation, one proof, one question, the link. If a draft runs over, cut the "how to repeat it" paragraph first, then the second explanation, and keep the proof.
 
 Rules: every number comes from the build. No claim the project did not prove. No Loom link. The link stays in the post. Check each acronym is spelled out once.
 
