@@ -48,6 +48,18 @@ If any answer is missing, add a sentence. Do not cut the answer to hit a time ta
 
 Rules: every number comes from the build. No claim the project did not prove. No Loom link. The link stays in the post. Check each acronym is spelled out once.
 
+## Images
+
+One image per post, 1200 by 627, made to show one fact from that post. Never stock photos, vendor diagrams, or other people's screenshots.
+
+- Same system for the whole series: a small badge with the project number and name, one accent color per project, and a footer line.
+- Rotate the style by post type so the feed does not go flat: video is a bold statement or a still of you on camera, GitHub is a terminal or real output, architecture is a light diagram, tool is a dark card with one number or one comparison.
+- Alternate light and dark across a week. Do not post two dark cards back to back.
+- Every image carries something the viewer can check: a count, a status line, a denied size, a role name.
+- Big type, few words. It must read on a phone.
+- No subscription IDs, sign-in names, or alert addresses in any frame.
+- Cards are generated from `loom-notes/tools/make-cards.py`, so a redesign is one edit.
+
 ## Private versus public
 
 Scripts and drafts live in `loom-notes`. Nothing public mentions where the project idea came from.
