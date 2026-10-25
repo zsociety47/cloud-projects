@@ -14,8 +14,8 @@ In each repo below, run `git fetch` and `git status -sb`. If it says `behind`, r
 | loom-notes | plans, lessons, concepts, LinkedIn drafts, video scripts |
 | 01-azure-static-website-poc | the public tracker site (progress.json) |
 | 02 to 05 azure poc repos | finished projects |
-| 06a-azure-terraform-pipeline-poc | in progress |
-| 06b-aws-to-azure-migrate-poc | in progress |
+| 07-azure-terraform-pipeline-poc | in progress |
+| 06-aws-to-azure-migrate-poc | in progress |
 | any new repo | create it from `setup-handoff.sh` and add it to this table |
 
 ## End of session

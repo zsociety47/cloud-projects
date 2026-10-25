@@ -10,7 +10,7 @@ Open the Terminal app on your Mac, not Claude and not Cursor's chat. Cursor's bu
 cd ~/Desktop/azure-mentorship/cloud-projects/environment-control
 ```
 
-Do this once, before you build project 6a:
+Do this once, before you build project 7:
 
 1. `az login` (sign in to Azure in the browser, then close the tab).
 2. `./envctl.sh` is a dry run. It lists what it would delete and deletes nothing. Read the list.
