@@ -26,7 +26,7 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 
 | # | Project | What it proves | Walkthrough | Status |
 |---|---------|----------------|-------------|--------|
-| 1 | Static website on Cloud Storage | A public website can be served from a Cloud Storage bucket with no server to manage | Pending | In progress |
+| 1 | [Static website on Cloud Storage](https://github.com/zsociety47/gcp-static-website-poc) | A public website can be served from a Cloud Storage bucket with no server to manage | Pending | In progress |
 
 ## Amazon Web Services
 
