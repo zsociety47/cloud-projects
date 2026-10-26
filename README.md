@@ -30,7 +30,9 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 
 ## Amazon Web Services
 
-*In progress.*
+| # | Project | What it proves | Walkthrough | Status |
+|---|---------|----------------|-------------|--------|
+| 1 | [Static website on CloudFront](https://github.com/zsociety47/aws-static-website-poc) | A private Simple Storage Service (S3) bucket can serve a site through CloudFront, and the bucket stays closed to the public | Pending | In progress |
 
 ---
 
