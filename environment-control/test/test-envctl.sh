@@ -110,3 +110,23 @@ grep -q "i-new" "$T/aws.calls" && { echo "FAIL aws deleted a new instance"; exit
 grep -q "projects delete gcp-old --quiet" "$T/gcloud.calls" || { echo "FAIL gcp apply old"; exit 1; }
 grep -q "projects delete gcp-new" "$T/gcloud.calls" && { echo "FAIL gcp deleted a new project"; exit 1; }
 echo "PASS aws and gcp apply deletes old, keeps new and networks"
+
+# The single-cloud scripts must not call the other cloud, and must not run the Azure leftover check.
+: > "$T/aws.calls"; : > "$T/gcloud.calls"
+out=$("$HERE/envctl-aws.sh")
+echo "$out" | grep -q "aws:" || { echo "FAIL aws wrapper produced no aws lines"; echo "$out"; exit 1; }
+echo "$out" | grep -q "gcp:" && { echo "FAIL aws wrapper called Google Cloud"; echo "$out"; exit 1; }
+echo "$out" | grep -q "leftover check" && { echo "FAIL aws wrapper ran the leftover check"; echo "$out"; exit 1; }
+grep -q . "$T/gcloud.calls" && { echo "FAIL aws wrapper invoked gcloud"; exit 1; }
+echo "PASS aws-only script stays on AWS"
+
+: > "$T/aws.calls"; : > "$T/gcloud.calls"
+out=$("$HERE/envctl-gcp.sh")
+echo "$out" | grep -q "gcp:" || { echo "FAIL gcp wrapper produced no gcp lines"; echo "$out"; exit 1; }
+echo "$out" | grep -q "aws:" && { echo "FAIL gcp wrapper called AWS"; echo "$out"; exit 1; }
+grep -q . "$T/aws.calls" && { echo "FAIL gcp wrapper invoked aws"; exit 1; }
+echo "PASS gcp-only script stays on Google Cloud"
+
+set +e; "$HERE/envctl-aws.sh" --cloud gcp >/dev/null; code=$?; set -e
+[ "$code" -eq 2 ] || { echo "FAIL aws wrapper accepted --cloud, exit $code"; exit 1; }
+echo "PASS single-cloud scripts reject --cloud"

@@ -15,6 +15,8 @@
 #   ./envctl.sh --cloud aws --apply  delete tagged AWS resources for real
 #   ./envctl.sh --min-age 2          skip anything created less than 2 hours ago (default 1)
 #   ./envctl.sh --check              only run the leftover check (no deleting at all)
+#   ./envctl-aws.sh                  dry run, AWS only
+#   ./envctl-gcp.sh                  dry run, Google Cloud only
 #
 # AWS has no resource group that deletes its children. --apply terminates
 # instances, deletes volumes, removes NAT gateways, and releases addresses.
@@ -36,6 +38,7 @@ APPLY=false
 CLOUD=azure
 MIN_AGE_HOURS=1
 CHECK_ONLY=false
+SWEEP_ONLY=false
 PROJECTS_DIR="${ENVCTL_PROJECTS_DIR:-$HOME/Desktop/azure-mentorship}"
 ENTRA_MATCH="${ENVCTL_ENTRA_MATCH:-zeon01|junior-dev}"
 LEFTOVERS=0
@@ -49,7 +52,8 @@ while [ $# -gt 0 ]; do
     --cloud) CLOUD="${2:?azure, gcp, aws, or all}"; shift ;;
     --min-age) MIN_AGE_HOURS="${2:?hours}"; shift ;;
     --check) CHECK_ONLY=true ;;
-    -h|--help) sed -n '2,23p' "$0"; exit 0 ;;
+    --sweep-only) SWEEP_ONLY=true ;;
+    -h|--help) sed -n '2,25p' "$0"; exit 0 ;;
     *) echo "Unknown option: $1" >&2; exit 2 ;;
   esac
   shift
@@ -279,6 +283,8 @@ if ! $CHECK_ONLY; then
     *) echo "Unknown cloud: $CLOUD" >&2; exit 2 ;;
   esac
 fi
-leftover_check
+if ! $SWEEP_ONLY; then
+  leftover_check
+fi
 say "envctl done"
 [ "$LEFTOVERS" -eq 0 ] || exit 3

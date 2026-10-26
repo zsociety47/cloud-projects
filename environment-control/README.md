@@ -60,11 +60,15 @@ For a group made with the Azure CLI: `az group create ... --tags lifetime=1d own
 ## Use
 
 ```bash
-./envctl.sh                 # dry run: lists what it would delete, deletes nothing
-./envctl.sh --apply         # deletes for real
+./envctl.sh                 # dry run, Azure: lists what it would delete, deletes nothing
+./envctl-aws.sh             # dry run, Amazon Web Services only
+./envctl-gcp.sh             # dry run, Google Cloud only
+./envctl.sh --apply         # deletes for real, Azure
 ./envctl.sh --min-age 2     # skip groups younger than 2 hours (default 1)
 ./envctl.sh --cloud all     # Azure, Google Cloud, and AWS. Add --apply to delete.
 ```
+
+`envctl-aws.sh` and `envctl-gcp.sh` accept `--apply` and `--min-age`. They do not accept `--cloud`. A dry run is the way to check them.
 
 Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscription id, account id, or sign-in name.
 
