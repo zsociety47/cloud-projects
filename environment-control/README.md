@@ -7,7 +7,7 @@ The rule: every lab resource is deleted at the end of the day it was made. This 
 Open the Terminal app on your Mac, not Claude and not Cursor's chat. Cursor's built-in terminal also works. Every command below is run from this folder:
 
 ```bash
-cd ~/Desktop/azure-mentorship/cloud-projects/environment-control
+cd ~/Desktop/cloud-portfolio/cloud-projects/environment-control
 ```
 
 Do this once, before you build project 7:
@@ -87,7 +87,7 @@ Deleting a resource group does not remove Entra users and app registrations, sub
 
 Every run ends with a leftover check, and `./envctl.sh --check` runs only that. It looks for:
 
-- Terraform state that still lists resources (the sign that `terraform destroy` was not run), under `ENVCTL_PROJECTS_DIR` (default `~/Desktop/azure-mentorship`)
+- Terraform state that still lists resources (the sign that `terraform destroy` was not run), under `ENVCTL_PROJECTS_DIR` (default `~/Desktop/cloud-portfolio`)
 - Entra users and app registrations whose names match `ENVCTL_ENTRA_MATCH` (default `zeon01|junior-dev`)
 - Policy assignments and budgets with `zeon01` in the name
 - Soft-deleted Key Vaults
@@ -100,7 +100,7 @@ If anything is found it prints `WARNING` lines, shows a macOS notification, and 
 |---|---|
 | Azure | Deletes resource groups tagged `lifetime=1d`. |
 | Google Cloud | Deletes projects labeled `lifetime=1d`. A `created` label cannot contain a colon, so write it as `2026-10-25t14-05-00z`. |
-| Amazon Web Services | Terminates instances, deletes volumes, removes NAT gateways, and releases addresses tagged `lifetime=1d`. Virtual networks stay until `terraform destroy`. |
+| Amazon Web Services | Terminates instances; deletes volumes, snapshots, load balancers, databases (no final snapshot) and buckets with their contents; removes NAT gateways; releases addresses. All must be tagged `lifetime=1d`. Virtual networks stay until `terraform destroy`. |
 
 A dry run is still the default. `--apply` is what deletes. The nightly job uses `--cloud all` only after you run `./install-launchd.sh` again. An agent installed earlier still cleans Azure only.
 

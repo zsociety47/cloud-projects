@@ -8,6 +8,8 @@ In each repo below, run `git fetch` and `git status -sb`. If it says `behind`, r
 
 ## The repos
 
+The folder is `~/Desktop/cloud-portfolio`. Project repos live in `azure/`, `gcp/`, or `aws/`. `cloud-projects` and `loom-notes` stay at the top.
+
 | Repo | What lives there |
 |---|---|
 | cloud-projects | standards, environment-control, roadmap |

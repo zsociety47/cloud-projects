@@ -128,6 +128,7 @@ Every project keeps both, and each has one job.
 
 Rules:
 1. The picture goes above the Mermaid diagram in the README. Say in one line which one is the reference and which is live.
-2. Both must show the same resources and names. If they disagree, the Terraform files win, then fix both.
+2. Both must show the same resources and names. If they disagree, the Terraform files win, then fix both in the same sitting.
 3. Export the picture without the "Made with Claude Design" mark. Claude's exports from the files do not carry it.
 4. **Final drawing before a project counts as done.** When the build is finished, Claude redraws the design picture from the finished files: no "not written yet" boxes, every name and port checked against the Terraform, then exports the PNG and PDF into `docs/architecture/`. The project is not done, and no video or post goes out, until this final picture is in the repo.
+5. **Two copies only (decided Oct 26, 2026).** The picture stays on the Claude Design canvas. The live map stays Mermaid in the README. Do not add a Figma or FigJam architecture file. Figma is not a third source of truth. If a later project needs a poster Cursor can redraw without Claude, move only the picture slot then, and still export PNG and PDF into `docs/architecture/`.

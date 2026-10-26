@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Dry-run sweep of Amazon Web Services resources tagged lifetime=1d.
-# Pass --apply to delete instances, volumes, NAT gateways, and addresses.
-# Virtual networks are listed and left. This script does not sweep Azure
+# Pass --apply to delete instances, volumes, snapshots, NAT gateways, addresses,
+# load balancers, databases (no final snapshot), and buckets. Networks are listed and left. This script does not sweep Azure
 # or Google Cloud.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"

@@ -76,7 +76,12 @@ case "\$1 \$2" in
   "resourcegroupstaggingapi get-resources") echo '{"ResourceTagMappingList":[
     {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:instance/i-old","Tags":[{"Key":"created","Value":"$OLD"}]},
     {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:instance/i-new","Tags":[{"Key":"created","Value":"$NEW"}]},
-    {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:vpc/vpc-abc","Tags":[{"Key":"created","Value":"$OLD"}]}
+    {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:vpc/vpc-abc","Tags":[{"Key":"created","Value":"$OLD"}]},
+    {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:snapshot/snap-old","Tags":[{"Key":"created","Value":"$OLD"}]},
+    {"ResourceARN":"arn:aws:rds:us-east-1:111122223333:db:db-old","Tags":[{"Key":"created","Value":"$OLD"}]},
+    {"ResourceARN":"arn:aws:s3:::bucket-old","Tags":[{"Key":"created","Value":"$OLD"}]},
+    {"ResourceARN":"arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/lb-old/abc123","Tags":[{"Key":"created","Value":"$OLD"}]},
+    {"ResourceARN":"arn:aws:s3:::bucket-new","Tags":[{"Key":"created","Value":"$NEW"}]}
   ]}' ;;
 esac
 exit 0
@@ -109,6 +114,11 @@ grep -q "terminate-instances --region us-east-1 --instance-ids i-old" "$T/aws.ca
 grep -q "i-new" "$T/aws.calls" && { echo "FAIL aws deleted a new instance"; exit 1; }
 grep -q "projects delete gcp-old --quiet" "$T/gcloud.calls" || { echo "FAIL gcp apply old"; exit 1; }
 grep -q "projects delete gcp-new" "$T/gcloud.calls" && { echo "FAIL gcp deleted a new project"; exit 1; }
+grep -q "delete-snapshot --region us-east-1 --snapshot-id snap-old" "$T/aws.calls" || { echo "FAIL aws snapshot"; exit 1; }
+grep -q "rds delete-db-instance --region us-east-1 --db-instance-identifier db-old --skip-final-snapshot" "$T/aws.calls" || { echo "FAIL aws database"; exit 1; }
+grep -q "s3 rb s3://bucket-old --force" "$T/aws.calls" || { echo "FAIL aws bucket"; exit 1; }
+grep -q "bucket-new" "$T/aws.calls" && { echo "FAIL aws deleted a new bucket"; exit 1; }
+grep -q "elbv2 delete-load-balancer --region us-east-1 --load-balancer-arn arn:aws:elasticloadbalancing" "$T/aws.calls" || { echo "FAIL aws load balancer"; exit 1; }
 echo "PASS aws and gcp apply deletes old, keeps new and networks"
 
 # The single-cloud scripts must not call the other cloud, and must not run the Azure leftover check.

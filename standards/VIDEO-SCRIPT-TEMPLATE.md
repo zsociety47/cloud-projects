@@ -24,6 +24,12 @@ Draft: ...
 **Flow A (live build):** for each step, show it, then say how it works and why you're doing it that way.
 **Flow B (walkthrough):** open the finished architecture. Walk each piece, then say how it works and why it's built that way.
 
+**File, then the portal.** For each important file, the middle has a pair of rows. The first row is the file: the setting and the name. The second row is the portal page where that same name is visible. Say the connection out loud: this line is that object.
+
+A verify script can run, and it is not the proof the viewer sees. If the check prints a pass and nothing else, open the portal page that shows the same fact. An empty list, a refused create, and a real create are all portal shots. When a rule allows a resource, create that resource in the portal, show it, and delete it before the session ends. When a rule blocks a resource, show the portal refusing it. Show a test user by display name. Keep the sign-in name off screen when it contains the tenant domain.
+
+Project 5 was recorded without these pairs. Leave that script as it is.
+
 | # | Step or component | What to show | What to say (how and why) | Screenshot to grab |
 |---|-------------------|--------------|---------------------------|--------------------|
 | 1 | | | | |

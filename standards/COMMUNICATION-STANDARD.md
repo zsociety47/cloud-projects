@@ -36,6 +36,14 @@ If any answer is missing, add a sentence. Do not cut the answer to hit a time ta
 5. What you would change, and what comes next in the series.
 6. Where the code and the written guide are.
 
+## File, then the portal
+
+From the next script on, every important file is shown twice. Open the file and name the setting. Then open that same object in the portal, with the same name on screen. A passing script is not the picture. The viewer cannot see what the script checked.
+
+If the proof is an empty list or a refusal, show that page in the portal anyway. If the proof is that something is allowed, create it in the portal, show it, and remove it before the session ends. A denied virtual machine and a virtual machine that actually gets created are both portal shots. Show a test user by display name. Keep the sign-in name off screen when it contains the tenant domain.
+
+Project 5 was recorded before this rule. Do not reshoot it and do not edit that script to add these shots.
+
 ## LinkedIn post (video post about 110 words; every other post about 75 words or fewer)
 
 1. Hook: one or two lines that stand alone.

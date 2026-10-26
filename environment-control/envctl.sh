@@ -19,7 +19,7 @@
 #   ./envctl-gcp.sh                  dry run, Google Cloud only
 #
 # AWS has no resource group that deletes its children. --apply terminates
-# instances, deletes volumes, removes NAT gateways, and releases addresses.
+# instances, deletes volumes, snapshots, load balancers, databases and buckets, removes NAT gateways, and releases addresses.
 # Virtual networks stay until terraform destroy. Google Cloud deletes the
 # project, which removes what is inside it. A label value cannot contain a
 # colon, so a Google Cloud created label uses 2026-10-25t14-05-00z.
@@ -29,7 +29,7 @@
 # those, and for any Terraform state that still lists resources (meaning terraform destroy was
 # not run). If it finds any, it prints a WARNING, shows a macOS notification, and exits 3.
 # Settings: ENVCTL_PROJECTS_DIR (where to look for terraform.tfstate, default
-# ~/Desktop/azure-mentorship), ENVCTL_ENTRA_MATCH (names to flag, default 'zeon01|junior-dev').
+# ~/Desktop/cloud-portfolio), ENVCTL_ENTRA_MATCH (names to flag, default 'zeon01|junior-dev').
 #
 # Never prints subscription ids, account ids, or sign-in names.
 set -euo pipefail
@@ -39,7 +39,7 @@ CLOUD=azure
 MIN_AGE_HOURS=1
 CHECK_ONLY=false
 SWEEP_ONLY=false
-PROJECTS_DIR="${ENVCTL_PROJECTS_DIR:-$HOME/Desktop/azure-mentorship}"
+PROJECTS_DIR="${ENVCTL_PROJECTS_DIR:-$HOME/Desktop/cloud-portfolio}"
 ENTRA_MATCH="${ENVCTL_ENTRA_MATCH:-zeon01|junior-dev}"
 LEFTOVERS=0
 LOG_DIR="${ENVCTL_LOG_DIR:-$HOME/.environment-control}"
@@ -145,8 +145,17 @@ aws_label() {
 import sys
 arn = sys.argv[1]
 parts = arn.split(":")
+service = parts[2] if len(parts) > 2 else ""
 tail = parts[5] if len(parts) > 5 else arn
-if "/" in tail:
+if service == "s3":
+    kind, ident = "bucket", tail
+elif service == "rds" and len(parts) > 6:
+    kind, ident = tail, parts[6]
+elif service == "elasticloadbalancing" and tail.startswith("loadbalancer/"):
+    rest = tail.split("/", 1)[1]
+    kind = "loadbalancer-v2" if rest.startswith(("app/", "net/", "gwy/")) else "loadbalancer"
+    ident = rest.split("/")[1] if kind == "loadbalancer-v2" else rest
+elif "/" in tail:
     kind, _, ident = tail.partition("/")
 else:
     kind, ident = "resource", tail or arn
@@ -190,6 +199,46 @@ aws_delete() {
           || say "aws: could not release address $id"
       else
         say "aws: would release address $id"
+      fi ;;
+    snapshot)
+      if $APPLY; then
+        aws ec2 delete-snapshot --region "$region" --snapshot-id "$id" >/dev/null 2>&1 \
+          && say "aws: deleting snapshot $id" \
+          || say "aws: could not delete snapshot $id"
+      else
+        say "aws: would delete snapshot $id"
+      fi ;;
+    loadbalancer-v2)
+      if $APPLY; then
+        aws elbv2 delete-load-balancer --region "$region" --load-balancer-arn "$arn" >/dev/null 2>&1 \
+          && say "aws: deleting load balancer $id" \
+          || say "aws: could not delete load balancer $id"
+      else
+        say "aws: would delete load balancer $id"
+      fi ;;
+    loadbalancer)
+      if $APPLY; then
+        aws elb delete-load-balancer --region "$region" --load-balancer-name "$id" >/dev/null 2>&1 \
+          && say "aws: deleting classic load balancer $id" \
+          || say "aws: could not delete classic load balancer $id"
+      else
+        say "aws: would delete classic load balancer $id"
+      fi ;;
+    db)
+      if $APPLY; then
+        aws rds delete-db-instance --region "$region" --db-instance-identifier "$id" --skip-final-snapshot --delete-automated-backups >/dev/null 2>&1 \
+          && say "aws: deleting database $id (no final snapshot)" \
+          || say "aws: could not delete database $id (protection on, or already deleting)"
+      else
+        say "aws: would delete database $id (no final snapshot)"
+      fi ;;
+    bucket)
+      if $APPLY; then
+        aws s3 rb "s3://$id" --force >/dev/null 2>&1 \
+          && say "aws: deleting bucket $id and its contents" \
+          || say "aws: could not delete bucket $id (versioned or locked: empty it by hand)"
+      else
+        say "aws: would delete bucket $id and its contents"
       fi ;;
     *)
       say "aws: leaving $kind $id (terraform destroy removes the network)" ;;

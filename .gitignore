@@ -1,0 +1,4 @@
+# Terraform state holds resource ids. Never commit it.
+*.tfstate
+*.tfstate.*
+.terraform/
