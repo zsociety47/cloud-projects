@@ -112,3 +112,22 @@ flowchart LR
 - [ ] 12 nodes or fewer
 - [ ] Caption written under the diagram
 - [ ] Readable in dark mode and light mode on GitHub
+
+---
+
+## Two diagrams per project (decided Oct 25, 2026)
+
+Every project keeps both, and each has one job.
+
+| | Design picture | Mermaid in the README |
+|---|---|---|
+| Job | The main layout and reference. Used in the README header, videos, LinkedIn posts and interviews. | The live map. Changes the moment the code changes. |
+| Lives in | `docs/architecture/architecture.png` and `.pdf`, drawn on the Projects 6 and 7 design canvas | The README, as text |
+| Shows status | Solid = built with Terraform, dashed = made in the portal or at cutover, dotted = planned and not written | Caption under the diagram |
+| Updated | Redrawn and re-exported when the design changes or a planned piece lands, and always before posting | In the same commit as the code |
+
+Rules:
+1. The picture goes above the Mermaid diagram in the README. Say in one line which one is the reference and which is live.
+2. Both must show the same resources and names. If they disagree, the Terraform files win, then fix both.
+3. Export the picture without the "Made with Claude Design" mark. Claude's exports from the files do not carry it.
+4. **Final drawing before a project counts as done.** When the build is finished, Claude redraws the design picture from the finished files: no "not written yet" boxes, every name and port checked against the Terraform, then exports the PNG and PDF into `docs/architecture/`. The project is not done, and no video or post goes out, until this final picture is in the repo.

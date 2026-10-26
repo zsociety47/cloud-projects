@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Installs the nightly 11:30 PM sweep on macOS. Run it yourself, on the Mac.
-#   ./install-launchd.sh            install (runs envctl.sh --apply --cloud azure every night)
+#   ./install-launchd.sh            install (runs envctl.sh --apply --cloud all every night)
 #   ./install-launchd.sh --remove   uninstall
 # If the Mac is asleep at 11:30 PM, launchd runs the job when it wakes.
 set -euo pipefail

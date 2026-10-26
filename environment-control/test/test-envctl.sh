@@ -56,3 +56,57 @@ esac
 AZ2
 out=$("$HERE/envctl.sh" --check 2>&1); echo "$out" | grep -q "leftover check: clean" || { echo "FAIL clean run"; echo "$out"; exit 1; }
 echo "PASS clean environment exits 0 and says clean"
+
+# Google Cloud and AWS. The stand-in commands record calls and delete nothing real.
+GCP_OLD=$(printf '%s' "$OLD" | tr 'T:' 't-' )
+GCP_NEW=$(printf '%s' "$NEW" | tr 'T:' 't-' )
+cat > "$T/bin/az" <<'AZ3'
+#!/usr/bin/env bash
+case "$1 $2" in
+  "account show") exit 0 ;;
+  "group list") echo '[]' ;;
+esac
+AZ3
+cat > "$T/bin/aws" <<AWS
+#!/usr/bin/env bash
+echo "\$*" >> "$T/aws.calls"
+case "\$1 \$2" in
+  "sts get-caller-identity") exit 0 ;;
+  "ec2 describe-regions") echo "us-east-1" ;;
+  "resourcegroupstaggingapi get-resources") echo '{"ResourceTagMappingList":[
+    {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:instance/i-old","Tags":[{"Key":"created","Value":"$OLD"}]},
+    {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:instance/i-new","Tags":[{"Key":"created","Value":"$NEW"}]},
+    {"ResourceARN":"arn:aws:ec2:us-east-1:111122223333:vpc/vpc-abc","Tags":[{"Key":"created","Value":"$OLD"}]}
+  ]}' ;;
+esac
+exit 0
+AWS
+cat > "$T/bin/gcloud" <<GCLOUD
+#!/usr/bin/env bash
+echo "\$*" >> "$T/gcloud.calls"
+case "\$1 \$2" in
+  "auth list") echo "tester@example.com" ;;
+  "projects list") echo '[{"projectId":"gcp-old","labels":{"lifetime":"1d","created":"$GCP_OLD"}},{"projectId":"gcp-new","labels":{"lifetime":"1d","created":"$GCP_NEW"}}]' ;;
+esac
+exit 0
+GCLOUD
+chmod +x "$T/bin/aws" "$T/bin/gcloud"
+: > "$T/aws.calls"; : > "$T/gcloud.calls"
+set +e; out=$("$HERE/envctl.sh" --cloud all); code=$?; set -e
+echo "$out" | grep -q "would delete instance i-old" || { echo "FAIL aws dry run old"; echo "$out"; exit 1; }
+echo "$out" | grep -q "keeping instance i-new" || { echo "FAIL aws min-age"; echo "$out"; exit 1; }
+echo "$out" | grep -q "leaving vpc vpc-abc" || { echo "FAIL aws network kept"; echo "$out"; exit 1; }
+echo "$out" | grep -q "111122223333" && { echo "FAIL printed an account id"; echo "$out"; exit 1; }
+echo "$out" | grep -q "would delete project gcp-old" || { echo "FAIL gcp dry run old"; echo "$out"; exit 1; }
+echo "$out" | grep -q "keeping project gcp-new" || { echo "FAIL gcp min-age"; echo "$out"; exit 1; }
+grep -q "terminate-instances" "$T/aws.calls" && { echo "FAIL aws dry run deleted"; exit 1; }
+grep -q "projects delete" "$T/gcloud.calls" && { echo "FAIL gcp dry run deleted"; exit 1; }
+echo "PASS aws and gcp dry run deletes nothing"
+
+: > "$T/aws.calls"; : > "$T/gcloud.calls"
+"$HERE/envctl.sh" --cloud all --apply >/dev/null || true
+grep -q "terminate-instances --region us-east-1 --instance-ids i-old" "$T/aws.calls" || { echo "FAIL aws apply old"; exit 1; }
+grep -q "i-new" "$T/aws.calls" && { echo "FAIL aws deleted a new instance"; exit 1; }
+grep -q "projects delete gcp-old --quiet" "$T/gcloud.calls" || { echo "FAIL gcp apply old"; exit 1; }
+grep -q "projects delete gcp-new" "$T/gcloud.calls" && { echo "FAIL gcp deleted a new project"; exit 1; }
+echo "PASS aws and gcp apply deletes old, keeps new and networks"

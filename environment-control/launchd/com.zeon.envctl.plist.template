@@ -9,7 +9,7 @@
     <string>__SCRIPT__</string>
     <string>--apply</string>
     <string>--cloud</string>
-    <string>azure</string>
+    <string>all</string>
   </array>
   <key>EnvironmentVariables</key>
   <dict>

@@ -63,7 +63,7 @@ For a group made with the Azure CLI: `az group create ... --tags lifetime=1d own
 ./envctl.sh                 # dry run: lists what it would delete, deletes nothing
 ./envctl.sh --apply         # deletes for real
 ./envctl.sh --min-age 2     # skip groups younger than 2 hours (default 1)
-./envctl.sh --cloud all     # also reports GCP and AWS
+./envctl.sh --cloud all     # Azure, Google Cloud, and AWS. Add --apply to delete.
 ```
 
 Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscription id, account id, or sign-in name.
@@ -71,7 +71,7 @@ Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscript
 ## Nightly run on the Mac
 
 ```bash
-./install-launchd.sh            # 11:30 PM every night, Azure, --apply
+./install-launchd.sh            # 11:30 PM every night, all three clouds, --apply
 ./install-launchd.sh --remove
 ```
 
@@ -94,9 +94,11 @@ If anything is found it prints `WARNING` lines, shows a macOS notification, and 
 
 | Cloud | Status |
 |---|---|
-| Azure | Working (deletes resource groups). Tested offline with a stand-in `az`; first real run is a dry run on the Mac. |
-| Google Cloud | Report only. Gets the project-delete adapter in the GCP round (one project per lab). |
-| AWS | Report only. Gets a tag-sweep or account-per-lab adapter in the AWS round. |
+| Azure | Deletes resource groups tagged `lifetime=1d`. |
+| Google Cloud | Deletes projects labeled `lifetime=1d`. A `created` label cannot contain a colon, so write it as `2026-10-25t14-05-00z`. |
+| Amazon Web Services | Terminates instances, deletes volumes, removes NAT gateways, and releases addresses tagged `lifetime=1d`. Virtual networks stay until `terraform destroy`. |
+
+A dry run is still the default. `--apply` is what deletes. The nightly job uses `--cloud all` only after you run `./install-launchd.sh` again. An agent installed earlier still cleans Azure only.
 
 ## Test
 
