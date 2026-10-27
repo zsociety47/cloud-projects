@@ -23,9 +23,9 @@ The same six ideas, in the same order and with the same tools, in every cloud.
 | 2 | A database with no public address, reachable only from the web tier | Python and the cloud SDK | [Complete](https://github.com/zsociety47/azure-two-tier-network-poc) | Planned | Planned |
 | 3 | A managed database whose password lives in a secret store, read by the VM's own identity | Python and the cloud SDK | [Complete](https://github.com/zsociety47/azure-sql-keyvault-poc) | Planned | Planned |
 | 4 | A network described in Terraform, with a firewall added to it after it is running | Terraform | [Complete](https://github.com/zsociety47/azure-terraform-iac-poc) | Planned | Planned |
-| 5 | Governance guardrails: allowed machine sizes, a read-only user, a budget | Terraform | In progress | Planned | Planned |
-| 6 | A Terraform pipeline from GitHub with remote state and checks | Terraform in a pipeline | In progress | Planned | Planned |
-| 6.5 | A migration that runs through that pipeline | Terraform in a pipeline | In progress | Planned | Planned |
+| 5 | Governance guardrails: allowed machine sizes, a read-only user, a budget | Terraform | [Complete](https://github.com/zsociety47/azure-governance-poc) | Planned | Planned |
+| 6 | A Terraform pipeline from GitHub with remote state and checks | Terraform in a pipeline | [In progress](https://github.com/zsociety47/azure-terraform-pipeline-poc) | Planned | Planned |
+| 6.5 | A migration that runs through that pipeline | Terraform in a pipeline | [In progress](https://github.com/zsociety47/azure-aws-migrate-poc) | Planned | Planned |
 
 Projects 6 and 6.5 work off each other. The pipeline tests and applies. The migration is the workload it delivers. Each cloud's migration brings in a different cloud: the Azure set brings in AWS, the Google Cloud set brings in Azure, and the AWS set brings in Google Cloud. Together the three sets cover each other.
 
