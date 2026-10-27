@@ -31,7 +31,7 @@ Do not apply these modules from GitHub. The runner cannot create the Entra app i
 
 ## Honest state
 
-Nothing in this folder has been applied. `rg-tfstate-zeon01` and `sttfstatezeon01` do not exist yet. `pipeline-foundation` has `projects = {}`. Project 7 proved the pattern (plan on a pull request, apply on `main`, numeric OpenID Connect subjects, Reader then Contributor). This is that pattern extracted. Do not recreate Project 7's groups.
+Applied Oct 26, 2026 from the laptop. `rg-tfstate-zeon01` (`lifetime=keep`) and `sttfstatezeon01` / container `tfstate` exist. State blob is `pipeline-foundation.tfstate`. `projects = {}`, so no Entra apps yet. A follow-up plan was no changes. Do not recreate Project 7's groups.
 
 Project 6 (AWS to Azure migrate) stays off this pipeline.
 

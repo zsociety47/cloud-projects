@@ -24,7 +24,7 @@ cloud-projects/
 | Folder | Cloud | What it is |
 |---|---|---|
 | [`terraform/azure/modules/`](terraform/azure/modules/) | Azure | **The Azure Terraform modules.** Shared state account, then one Microsoft Entra app per GitHub repository |
-| [`terraform/azure/pipeline-foundation/`](terraform/azure/pipeline-foundation/) | Azure | Laptop-only root that applies those modules. Not applied yet |
+| [`terraform/azure/pipeline-foundation/`](terraform/azure/pipeline-foundation/) | Azure | Laptop-only root. Applied Oct 26, 2026: keep group and state account exist. `projects = {}` |
 | [`terraform/azure/examples/`](terraform/azure/examples/) | Azure | Copy-ready Plan / Apply callers and a `backend.tf` stub |
 | [`terraform/gcp/`](terraform/gcp/) | Google Cloud | Empty on purpose. Shared GCP Terraform lands here later |
 | [`terraform/aws/`](terraform/aws/) | Amazon Web Services | Empty on purpose. Shared AWS Terraform lands here later |
