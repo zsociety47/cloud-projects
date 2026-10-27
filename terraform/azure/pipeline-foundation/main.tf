@@ -2,12 +2,12 @@
 # per entry in var.projects. GitHub cannot run this root.
 
 module "tfstate" {
-  source = "../modules/azure-tfstate"
+  source = "../modules/tfstate"
 }
 
 module "oidc" {
   for_each = var.projects
-  source   = "../modules/azure-github-oidc"
+  source   = "../modules/github-oidc"
 
   github_repository            = each.value.github_repository
   github_owner_id              = each.value.github_owner_id

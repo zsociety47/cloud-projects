@@ -4,7 +4,7 @@ Laptop-only root. It creates the shared Terraform state account and, when you ad
 
 Do not run `terraform apply` from GitHub. Do not apply until you type the go-ahead in chat.
 
-This folder is not a module. The modules it calls are in [`../modules/`](../modules/). The agent contract, copy-ready callers, and honest state live in the [parent README](../README.md).
+Azure only. This folder is not a module. The modules it calls are in [`../modules/`](../modules/). The agent contract, copy-ready callers, and honest state live in the [parent README](../README.md).
 
 ## What it creates
 

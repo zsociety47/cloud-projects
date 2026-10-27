@@ -1,6 +1,6 @@
-# azure-github-oidc
+# github-oidc
 
-A Terraform module. It lives at [`terraform/modules/azure-github-oidc`](https://github.com/zsociety47/cloud-projects/tree/main/terraform/modules/azure-github-oidc).
+An Azure Terraform module. It lives at [`terraform/azure/modules/github-oidc`](https://github.com/zsociety47/cloud-projects/tree/main/terraform/azure/modules/github-oidc).
 
 One GitHub repository's identity in Azure: Entra app, two federated credentials, Reader on the shared state group, Storage Blob Data Contributor on the state account, Contributor on **that project's** resource group.
 

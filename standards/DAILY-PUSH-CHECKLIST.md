@@ -12,7 +12,7 @@ The folder is `~/Desktop/cloud-portfolio`. Project repos live in `azure/`, `gcp/
 
 | Repo | What lives there |
 |---|---|
-| cloud-projects | standards, environment-control, roadmap, terraform/modules |
+| cloud-projects | standards, environment-control, roadmap, terraform/azure/modules |
 | loom-notes | plans, lessons, concepts, LinkedIn drafts, video scripts |
 | 01-azure-static-website-poc | the public tracker site (progress.json) |
 | gcp/01-gcp-static-website-poc | static website on Cloud Storage |

@@ -12,5 +12,5 @@ permissions:
   pull-requests: write
 jobs:
   plan:
-    uses: zsociety47/cloud-projects/.github/workflows/terraform-plan.yml@main
+    uses: zsociety47/cloud-projects/.github/workflows/azure-terraform-plan.yml@main
     secrets: inherit

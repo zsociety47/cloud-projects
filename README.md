@@ -12,22 +12,27 @@ This repository is the hub. Project code lives in other GitHub repositories, lis
 cloud-projects/
 ├── README.md                 this file: project index
 ├── ROADMAP.md                what comes after the current series
-├── terraform/                shared Terraform. The modules are in terraform/modules/
-├── .github/workflows/        reusable Plan and Apply jobs later projects call
+├── terraform/
+│   ├── azure/                Azure modules, laptop root, examples
+│   ├── gcp/                  Google Cloud (empty until needed)
+│   └── aws/                  Amazon Web Services (empty until needed)
+├── .github/workflows/        azure-terraform-plan.yml and azure-terraform-apply.yml
 ├── standards/                naming, documentation, diagrams, video, posts
 └── environment-control/      nightly delete of short-lived resource groups
 ```
 
-| Folder | What it is |
-|---|---|
-| [`terraform/modules/`](terraform/modules/) | **The Terraform modules.** Shared state account, then one Microsoft Entra app per GitHub repository |
-| [`terraform/pipeline-foundation/`](terraform/pipeline-foundation/) | Laptop-only root that applies those modules. Not applied yet |
-| [`terraform/examples/`](terraform/examples/) | Copy-ready Plan / Apply callers and a `backend.tf` stub |
-| [`.github/workflows/`](.github/workflows/) | The reusable GitHub Actions jobs the callers point at |
-| [`standards/`](standards/) | How every project is named, documented, drawn, recorded, and posted |
-| [`environment-control/`](environment-control/) | Nightly sweep that deletes resource groups tagged `lifetime=1d` |
+| Folder | Cloud | What it is |
+|---|---|---|
+| [`terraform/azure/modules/`](terraform/azure/modules/) | Azure | **The Azure Terraform modules.** Shared state account, then one Microsoft Entra app per GitHub repository |
+| [`terraform/azure/pipeline-foundation/`](terraform/azure/pipeline-foundation/) | Azure | Laptop-only root that applies those modules. Not applied yet |
+| [`terraform/azure/examples/`](terraform/azure/examples/) | Azure | Copy-ready Plan / Apply callers and a `backend.tf` stub |
+| [`terraform/gcp/`](terraform/gcp/) | Google Cloud | Empty on purpose. Shared GCP Terraform lands here later |
+| [`terraform/aws/`](terraform/aws/) | Amazon Web Services | Empty on purpose. Shared AWS Terraform lands here later |
+| [`.github/workflows/`](.github/workflows/) | Azure today | Reusable jobs, named `azure-*`. GCP and AWS get their own prefixes |
+| [`standards/`](standards/) | all | How every project is named, documented, drawn, recorded, and posted |
+| [`environment-control/`](environment-control/) | Azure, GCP, AWS | Nightly sweep. Azure is `envctl.sh`, then `envctl-gcp.sh` and `envctl-aws.sh` |
 
-Each of those folders has its own README. The walkthrough of building the pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc). Later projects call `terraform/modules/`. They do not copy that repository.
+Each of those folders has its own README. The walkthrough of building the Azure pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc). Later Azure projects call `terraform/azure/modules/`. They do not copy that repository.
 
 ## Roadmap
 
@@ -63,7 +68,7 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 
 ## Standards
 
-- [Terraform modules](terraform/modules/): shared state account and one Entra app per GitHub repository. Reusable Plan / Apply jobs are in [`.github/workflows/`](.github/workflows/). The walkthrough of building that pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc).
+- [Azure Terraform modules](terraform/azure/modules/): shared state account and one Entra app per GitHub repository. Reusable Azure Plan / Apply jobs are in [`.github/workflows/`](.github/workflows/). Google Cloud and AWS slots are [`terraform/gcp/`](terraform/gcp/) and [`terraform/aws/`](terraform/aws/). The walkthrough of building the Azure pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc).
 - [Architecture Diagram Standard](standards/DIAGRAM-STANDARD.md): tools, colors, line styles, and checklist used for every diagram
 - [Project README Template](standards/README-TEMPLATE.md): video first, then step-by-step instructions with screenshots, then the technical detail
 - [Documentation Standard](standards/DOCUMENTATION-STANDARD.md): what gets written, when, and what done means

@@ -1,6 +1,6 @@
 # Copy to terraform.tfvars (gitignored). Leave projects empty until
 # a project's resource group exists. Get ids from:
-#   ../modules/azure-github-oidc/scripts/oidc-ids.sh owner/name
+#   ../modules/github-oidc/scripts/oidc-ids.sh owner/name
 #
 # Do not invent a resource group name. Use the name that project already locked.
 # Azure 8 locked rg-cost-poc-zeon01. Its state blob key is cost-dashboard.tfstate.

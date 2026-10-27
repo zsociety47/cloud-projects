@@ -1,6 +1,6 @@
 # Standards
 
-How every project in this portfolio is named, documented, drawn, recorded, and posted. Project code does not live here. Shared Terraform modules live in [`../terraform/modules/`](../terraform/modules/).
+How every project in this portfolio is named, documented, drawn, recorded, and posted. Project code does not live here. Shared Terraform is grouped by cloud under [`../terraform/`](../terraform/). Azure modules live in [`../terraform/azure/modules/`](../terraform/azure/modules/).
 
 | File | What it is |
 |---|---|

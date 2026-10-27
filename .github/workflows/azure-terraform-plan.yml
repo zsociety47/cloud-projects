@@ -1,4 +1,4 @@
-# Reusable plan job. Pull requests plan and check. They do not apply.
+# Azure only. Reusable plan job. Pull requests plan and check. They do not apply.
 # Do not set a GitHub environment on the caller: that would change
 # the OpenID Connect subject and Azure would refuse it.
 

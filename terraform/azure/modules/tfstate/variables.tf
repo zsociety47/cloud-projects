@@ -1,7 +1,7 @@
 # Names for the shared Terraform state account.
-# The bootstrap root in terraform/pipeline-foundation passes these in.
+# The bootstrap root in terraform/azure/pipeline-foundation passes these in.
 # This module does not create an Entra app. Later projects get their
-# own app from terraform/modules/azure-github-oidc.
+# own app from terraform/azure/modules/github-oidc.
 
 variable "location" {
   description = "Azure region for the state resource group and the storage account."

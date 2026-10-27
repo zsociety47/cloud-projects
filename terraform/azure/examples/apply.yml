@@ -11,5 +11,5 @@ permissions:
   contents: read
 jobs:
   apply:
-    uses: zsociety47/cloud-projects/.github/workflows/terraform-apply.yml@main
+    uses: zsociety47/cloud-projects/.github/workflows/azure-terraform-apply.yml@main
     secrets: inherit

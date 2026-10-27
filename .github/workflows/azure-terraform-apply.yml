@@ -1,4 +1,4 @@
-# Reusable apply job. Pushes to main check, then apply.
+# Azure only. Reusable apply job. Pushes to main check, then apply.
 # Pull requests cannot start this job if the caller uses on.push.
 # Do not set a GitHub environment on the caller.
 

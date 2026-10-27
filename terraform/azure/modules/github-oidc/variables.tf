@@ -1,6 +1,6 @@
 # One GitHub repository's identity in Azure.
-# Call this module once per project from terraform/pipeline-foundation.
-# This module lives in terraform/modules/azure-github-oidc.
+# Call this module once per project from terraform/azure/pipeline-foundation.
+# This module lives in terraform/azure/modules/github-oidc.
 # The project's resource group must already exist. This module
 # does not create resource groups. GitHub is Contributor on that
 # group only. Each project gets its own Entra app.
