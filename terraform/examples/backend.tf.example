@@ -1,0 +1,12 @@
+# Copy to the project's backend.tf after the shared state account exists.
+# Change only the blob key. One blob per project.
+
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "rg-tfstate-zeon01"
+    storage_account_name = "sttfstatezeon01"
+    container_name       = "tfstate"
+    key                  = "REPLACE-PROJECT.tfstate"
+    use_azuread_auth     = true
+  }
+}

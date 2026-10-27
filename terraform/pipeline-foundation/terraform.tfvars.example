@@ -1,0 +1,17 @@
+# Copy to terraform.tfvars (gitignored). Leave projects empty until
+# a project's resource group exists. Get ids from:
+#   ../azure-github-oidc/scripts/oidc-ids.sh owner/name
+#
+# Do not invent a resource group name. Use the name that project already locked.
+# Azure 9 locked rg-backup-poc-zeon01. Azure 8 has not locked a group name yet.
+#
+# projects = {
+#   backup = {
+#     github_repository            = "zsociety47/azure-backup-system"
+#     github_owner_id              = "122703085"
+#     github_repository_id         = "replace-me"
+#     pipeline_resource_group_name = "rg-backup-poc-zeon01"
+#   }
+# }
+
+projects = {}

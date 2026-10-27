@@ -20,6 +20,8 @@ The folder is `~/Desktop/cloud-portfolio`. Project repos live in `azure/`, `gcp/
 | 02 to 05 azure poc repos | finished projects |
 | 07-azure-terraform-pipeline-poc | in progress |
 | 06-aws-to-azure-migrate-poc | in progress |
+| 08-azure-cost-dashboard | cost visibility dashboard, in progress |
+| 09-azure-backup-system | backup system, in progress |
 | any new repo | create it from `setup-handoff.sh` and add it to this table |
 
 ## End of session

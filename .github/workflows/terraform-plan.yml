@@ -1,0 +1,118 @@
+# Reusable plan job. Pull requests plan and check. They do not apply.
+# Do not set a GitHub environment on the caller: that would change
+# the OpenID Connect subject and Azure would refuse it.
+
+name: Terraform plan
+
+on:
+  workflow_call:
+    inputs:
+      working_directory:
+        description: "Directory that contains the Terraform root."
+        type: string
+        default: "."
+      terraform_version:
+        description: "Terraform version for hashicorp/setup-terraform."
+        type: string
+        default: "1.15.5"
+      verify_script:
+        description: "Path to the project's verify script, relative to the repository root."
+        type: string
+        default: "scripts/verify.sh"
+      run_verify:
+        description: "Run the verify script after plan."
+        type: boolean
+        default: true
+    secrets:
+      AZURE_CLIENT_ID:
+        required: true
+      AZURE_TENANT_ID:
+        required: true
+      AZURE_SUBSCRIPTION_ID:
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+    env:
+      ARM_USE_OIDC: true
+      ARM_USE_AZUREAD: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ inputs.terraform_version }}
+          terraform_wrapper: false
+
+      - name: Sign in to Azure with OpenID Connect
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Check format
+        run: terraform fmt -check -recursive
+
+      - name: Initialize
+        run: terraform init -input=false
+
+      - name: Validate
+        run: terraform validate
+
+      - name: Plan
+        run: |
+          set -euo pipefail
+          terraform plan -input=false -no-color | tee "$GITHUB_WORKSPACE/plan.txt"
+
+      - name: Post the plan on the pull request
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+          import os, re
+          workspace = Path(os.environ["GITHUB_WORKSPACE"])
+          text = (workspace / "plan.txt").read_text()
+          text = re.sub(r"/subscriptions/[0-9a-fA-F-]+", "/subscriptions/<id>", text)
+          text = re.sub(
+              r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+              "<id>",
+              text,
+          )
+          (workspace / "plan-comment.md").write_text(
+              "## Terraform plan\n\nThis job does not apply.\n\n```text\n"
+              + text
+              + "\n```\n"
+          )
+          PY
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file "$GITHUB_WORKSPACE/plan-comment.md"
+
+      - name: Verify
+        if: ${{ inputs.run_verify }}
+        working-directory: ${{ github.workspace }}
+        run: |
+          set -euo pipefail
+          script="${{ inputs.verify_script }}"
+          if [[ ! -f "$script" ]]; then
+            echo "No verify script at $script; skipping."
+            exit 0
+          fi
+          chmod +x "$script"
+          "$script"

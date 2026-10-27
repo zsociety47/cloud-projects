@@ -38,6 +38,7 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 
 ## Standards
 
+- [Terraform modules](terraform/): shared state account and one Entra app per GitHub repository, plus reusable Plan / Apply jobs. The walkthrough of building that pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc).
 - [Architecture Diagram Standard](standards/DIAGRAM-STANDARD.md): tools, colors, line styles, and checklist used for every diagram
 - [Project README Template](standards/README-TEMPLATE.md): video first, then step-by-step instructions with screenshots, then the technical detail
 - [Documentation Standard](standards/DOCUMENTATION-STANDARD.md): what gets written, when, and what done means

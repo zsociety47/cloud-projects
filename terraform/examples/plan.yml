@@ -1,0 +1,16 @@
+# Copy to the project's .github/workflows/plan.yml.
+# Do not set a GitHub environment: that would change the
+# OpenID Connect subject and Azure would refuse it.
+
+name: Plan
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+jobs:
+  plan:
+    uses: zsociety47/cloud-projects/.github/workflows/terraform-plan.yml@main
+    secrets: inherit
