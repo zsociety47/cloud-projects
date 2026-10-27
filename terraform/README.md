@@ -1,17 +1,29 @@
-# Terraform modules
+# Shared Terraform
 
-Shared building blocks for Azure projects after [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc). That repository stays the demo of building the pipeline from scratch. These modules are the foundation later projects call.
+Terraform is the tool that builds cloud from text files. This folder is the shared pipeline later Azure projects call. The walkthrough of building that pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc). Do not copy that repository.
 
-Do not copy `azure-terraform-pipeline-poc`. Call this folder.
+**The modules are in [`modules/`](modules/).** That is the folder to open first.
 
-| Folder | Apply from | What it creates |
+```text
+terraform/
+├── modules/                 the modules (call these)
+│   ├── azure-tfstate/       keep resource group and state storage account
+│   └── azure-github-oidc/   one Microsoft Entra app per GitHub repository
+├── pipeline-foundation/     laptop root that applies the modules
+├── examples/                copy into a later project's repo
+└── README.md                this file
+```
+
+Exact GitHub path for the modules: https://github.com/zsociety47/cloud-projects/tree/main/terraform/modules
+
+| Folder | What it is | Apply from |
 |---|---|---|
-| `azure-tfstate` | `pipeline-foundation` on the laptop, once | The keep resource group and the state storage account |
-| `azure-github-oidc` | `pipeline-foundation` on the laptop, once per project | One Entra app, two federated credentials, Reader on the state group, blob contributor on the state account, Contributor on that project's group |
-| `pipeline-foundation` | the laptop, never GitHub | The root that calls the two modules. `projects = {}` until a later project is ready |
-| `examples/` | copy into the later project's repo | Caller workflows and a `backend.tf` stub |
+| [`modules/azure-tfstate/`](modules/azure-tfstate/) | Keep resource group and state storage account | `pipeline-foundation` on the laptop, once |
+| [`modules/azure-github-oidc/`](modules/azure-github-oidc/) | One Entra app, two federated credentials, Reader on the state group, blob contributor on the state account, Contributor on that project's group | `pipeline-foundation` on the laptop, once per project |
+| [`pipeline-foundation/`](pipeline-foundation/) | The root that calls the two modules. `projects = {}` until a later project is ready | the laptop, never GitHub |
+| [`examples/`](examples/) | Caller workflows and a `backend.tf` stub | copy into the later project's repo |
 
-Reusable GitHub Actions jobs live in [`.github/workflows/terraform-plan.yml`](../.github/workflows/terraform-plan.yml) and [`terraform-apply.yml`](../.github/workflows/terraform-apply.yml). A project workflow calls them. It does not copy the job.
+Reusable GitHub Actions jobs live next to this folder, not inside it: [`.github/workflows/terraform-plan.yml`](../.github/workflows/terraform-plan.yml) and [`terraform-apply.yml`](../.github/workflows/terraform-apply.yml). A project workflow calls them. It does not copy the job. What those files are is in [`.github/README.md`](../.github/README.md).
 
 Do not apply these modules from GitHub. The runner cannot create the Entra app it uses to sign in.
 
@@ -21,15 +33,19 @@ Nothing in this folder has been applied. `rg-tfstate-zeon01` and `sttfstatezeon0
 
 Project 6 (AWS to Azure migrate) stays off this pipeline.
 
-## For Azure 8 and 9 agents
+## For later Azure project agents
 
-Read this file before writing Terraform. Do not copy Project 7's workflows. Do not share Project 7's Entra app. One Microsoft Entra app per GitHub repository.
+Read this file before writing Terraform. The modules you call are in [`modules/`](modules/). Do not copy Project 7's workflows. Do not share Project 7's Entra app. One Microsoft Entra app per GitHub repository.
 
-When that project has a resource group and a GitHub remote:
+Azure 8 (cost dashboard) calls these modules. Locked group: `rg-cost-poc-zeon01`. State blob key: `cost-dashboard.tfstate`.
+
+Azure 9 (backup) does not call these modules on this Azure pass. Locked group: `rg-backup-poc-zeon01`. Leave that repo as written.
+
+When a project that should call this pipeline has a resource group and a GitHub remote:
 
 1. Create the project's resource group on the laptop. GitHub cannot create groups.
-2. Create the GitHub repository, then run `azure-github-oidc/scripts/oidc-ids.sh owner/name`.
-3. Add a `projects` entry in `pipeline-foundation/terraform.tfvars` (see `terraform.tfvars.example`). Use the resource group name that project already locked. Azure 9 locked `rg-backup-poc-zeon01`. Azure 8 has not locked a group name yet.
+2. Create the GitHub repository, then run `modules/azure-github-oidc/scripts/oidc-ids.sh owner/name`.
+3. Add a `projects` entry in `pipeline-foundation/terraform.tfvars` (see `terraform.tfvars.example`). Use the resource group name that project already locked.
 4. Stop. Do not apply `pipeline-foundation` until Zeon types the go-ahead in chat.
 5. After that apply, pipe `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_SUBSCRIPTION_ID` into that repo's secrets. Each project has its own client id. Do not print the values.
 6. Copy `examples/backend.tf.example` into that repo as `backend.tf`. Change only the blob `key`.
