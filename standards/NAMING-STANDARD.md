@@ -2,6 +2,8 @@
 
 Cheat sheet. Every name should read like a short sentence: **what it is, what it is for, which environment, whose.** The abbreviations are the ones Microsoft publishes in the Cloud Adoption Framework, so a hiring manager or another engineer reads them the same way you do.
 
+Google Cloud has its own section at the end (section 9). Sections 1 to 8 are the Azure rules. Google publishes no abbreviation list, so section 9 keeps a short set of stems that read the same way in this portfolio.
+
 Source: [Abbreviation recommendations for Azure resources](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations) and [Define your naming convention](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). Checked October 2026.
 
 ---
@@ -152,7 +154,7 @@ Standard tag set on every resource group, starting with project 7 (required, no 
 
 ## 7. Someone else running this
 
-The names in a published repository stay this proof (`zeon01`, `owner = zeon`). A later operator does not rename those committed values. They open the files the README **Run this as yourself** table links, and they replace only the owner-and-number slot.
+The names in a published repository stay this proof (`zeon01`, `owner = zeon`). A later operator does not rename those committed values. They open the files the README **Run this as yourself** table links, and they replace only the owner slot, which is their short name plus a number.
 
 | This proof | Their copy |
 |---|---|
@@ -175,3 +177,43 @@ Every new project ships that table. Azure projects 1 through 6 already have it. 
 - [ ] Does every new resource group carry `lifetime`, `owner`, `project`, and `created`?
 - [ ] Variable written in whole words, ending in its attribute?
 - [ ] Does **Run this as yourself** link the file that holds this name?
+- [ ] On Google Cloud, does the name follow section 9, including the 6-character minimum for a service account id?
+
+---
+
+## 9. Google Cloud
+
+Checked October 27, 2026 against the `gcloud projects create` reference, the Resource Manager page "Create projects", and the Identity and Access Management discovery document for `CreateServiceAccountRequest`.
+
+Google Cloud publishes no abbreviation list. This portfolio keeps these stems so a name reads the same way from one cloud to the next:
+
+| Stem | Say it as | Google Cloud resource | Example |
+|---|---|---|---|
+| `vpc` | Virtual Private Cloud | VPC network | `vpc-twotier-poc` |
+| `snet` | subnet | Subnet | `snet-web` |
+| `vm` | virtual machine | Compute Engine instance | `vm-web-01` |
+| `sa` | service account | Service account | `sa-web` |
+| `ip` | Internet Protocol address | Reserved external address | `ip-web-01` |
+
+Azure's network stem is `vnet`. On Google Cloud the same idea uses `vpc`, because that is the product name. The other stems match Azure.
+
+Two kinds of names, same split as Azure:
+
+| Kind | Pattern | Examples |
+|---|---|---|
+| **Top level.** Unique across Google Cloud, or the thing you delete | short project word, then `poc`, then the owner and a number | Project id `twotier-poc-zeon01`. A later operator replaces `zeon01` only |
+| **Inside a project.** Unique in that project | stem, then role, then a number only when a second one could exist | `snet-web`, `vm-web-01`, `ip-nat-01` |
+
+Project id rules, from the Create projects page:
+
+- 6 to 30 characters.
+- Lowercase letters, digits, and hyphens.
+- Starts with a letter. Does not end with a hyphen.
+- Cannot contain `google`, `ssl`, `null`, or `undefined`.
+- A deleted id cannot be reused until deletion finishes, which can take 30 days. The picture's id is a placeholder. Pick a fresh one in `.env` at build time.
+
+Display name (the human name, not the id): 4 to 30 characters. Letters, digits, spaces, hyphens, single quotes, and exclamation points. Ends with a letter or a digit. Example: `02 two tier network poc`.
+
+Service account id, from the Identity and Access Management API: 6 to 30 characters, starting with a lowercase letter. `sa-web` fits. `sa-db` is 5 characters and does not. Do not shorten a stem to sneak under a limit. Lengthen the role (`sa-db-01`) and say so before the first create.
+
+Labels, not tags. The same four keys as every other cloud: `lifetime`, `owner`, `project`, `created`. A label value cannot contain a colon, so `created` looks like `2026-10-26t23-45-00z`. Keys start with a lowercase letter. Values are lowercase letters, digits, hyphens, and underscores. The nightly sweep reads `lifetime=1d`.

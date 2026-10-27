@@ -32,7 +32,7 @@ cloud-projects/
 | [`standards/`](standards/) | all | How every project is named, documented, drawn, recorded, and posted |
 | [`environment-control/`](environment-control/) | Azure, GCP, AWS | Nightly sweep. Azure is `envctl.sh`, then `envctl-gcp.sh` and `envctl-aws.sh` |
 
-Each of those folders has its own README. The walkthrough of building the Azure pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc). Later Azure projects call `terraform/azure/modules/`. They do not copy that repository.
+Each of those folders has its own README. The walkthrough of building the Azure pipeline by hand is [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc). Later Azure projects call `terraform/azure/modules/`. They don't copy that repository.
 
 ## Roadmap
 
@@ -46,7 +46,7 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 |---|---------|----------------|-------------|--------|
 | 1 | [Static Website on Blob Storage](https://github.com/zsociety47/azure-static-website-poc) | A static site can be hosted on Azure Storage and deployed from GitHub Actions with no stored credentials | [Loom](https://www.loom.com/share/56b36c39bfb84152828e7ee3ad1f6cc7) | Complete |
 | 2 | [Secure Two-Tier Web Application on Azure](https://github.com/zsociety47/azure-two-tier-network-poc) | A database with no public IP address is reachable only from the web tier | [Loom](https://www.loom.com/share/3627b9267eff4235b9f635ca752d191c) | Complete |
-| 3 | [Managed SQL and Key Vault on Azure](https://github.com/zsociety47/azure-sql-keyvault-poc) | An app VM reads its database password from Key Vault with a managed identity, and its role cannot write secrets | [Loom](https://www.loom.com/share/326b50f1396142d9848704c6918908b5) | Complete |
+| 3 | [Managed SQL and Key Vault on Azure](https://github.com/zsociety47/azure-sql-keyvault-poc) | An app VM reads its database password from Key Vault with a managed identity, and its role can't write secrets | [Loom](https://www.loom.com/share/326b50f1396142d9848704c6918908b5) | Complete |
 | 4 | [Infrastructure as Code with Terraform on Azure](https://github.com/zsociety47/azure-terraform-iac-poc) | A virtual network can be described in Terraform, gain a firewall after it already exists, and be removed with one command | [Loom](https://www.loom.com/share/b0448fef104a4bdc90a3d7c63cad2014) | Complete |
 | 5 | [Governance guardrails on Azure](https://github.com/zsociety47/azure-governance-poc) | A reader is limited to one resource group, policy blocks an oversized virtual machine before it is created, and a budget alerts as spend nears the monthly limit | [Loom](https://www.loom.com/share/6f35ccb43dbb4a57b4905d501d9b9163) | Complete |
 | 6 | [Migrate a Windows Server from AWS to Azure](https://github.com/zsociety47/azure-aws-migrate-poc) | A Windows Server on Amazon Web Services (AWS) can be discovered, assessed, replicated, and cut over to Azure | Pending | In progress |
@@ -57,6 +57,7 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 | # | Project | What it proves | Walkthrough | Status |
 |---|---------|----------------|-------------|--------|
 | 1 | [Static website on Cloud Storage](https://github.com/zsociety47/gcp-static-website-poc) | A public website can be served from a Cloud Storage bucket with no server to manage | Pending | In progress |
+| 2 | [Two-tier network](https://github.com/zsociety47/gcp-two-tier-network-poc) | A database with no public address is reachable only from the web tier | Pending | In progress |
 
 ## Amazon Web Services
 

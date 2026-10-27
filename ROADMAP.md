@@ -20,7 +20,7 @@ The same six ideas, in the same order and with the same tools, in every cloud.
 | # | Idea | Tool | Azure | Google Cloud | AWS |
 |---|------|------|-------|--------------|-----|
 | 1 | Host a static site and deploy it with no stored credentials | Bash and the cloud command line | [Complete](https://github.com/zsociety47/azure-static-website-poc) | [In progress](https://github.com/zsociety47/gcp-static-website-poc) | [In progress](https://github.com/zsociety47/aws-static-website-poc) |
-| 2 | A database with no public address, reachable only from the web tier | Python and the cloud SDK | [Complete](https://github.com/zsociety47/azure-two-tier-network-poc) | Planned | Planned |
+| 2 | A database with no public address, reachable only from the web tier | Python and the cloud SDK | [Complete](https://github.com/zsociety47/azure-two-tier-network-poc) | [In progress](https://github.com/zsociety47/gcp-two-tier-network-poc) | Planned |
 | 3 | A managed database whose password lives in a secret store, read by the VM's own identity | Python and the cloud SDK | [Complete](https://github.com/zsociety47/azure-sql-keyvault-poc) | Planned | Planned |
 | 4 | A network described in Terraform, with a firewall added to it after it is running | Terraform | [Complete](https://github.com/zsociety47/azure-terraform-iac-poc) | Planned | Planned |
 | 5 | Governance guardrails: allowed machine sizes, a read-only user, a budget | Terraform | [Complete](https://github.com/zsociety47/azure-governance-poc) | Planned | Planned |
@@ -43,4 +43,4 @@ Tools by project: Bash first, then Python for projects 2 and 3, then Terraform f
 
 Each project gets a recorded walkthrough, on camera: what it is, the business problem it solves, the build or the finished architecture, and what I would change. Azure projects get four posts each. The second and third clouds get two: the video and repository together, then the architecture and tool together.
 
-*Last updated October 26, 2026.*
+*Last updated October 27, 2026.*
