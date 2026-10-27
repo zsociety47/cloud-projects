@@ -2,7 +2,13 @@
 # per entry in var.projects. GitHub cannot run this root.
 
 module "tfstate" {
-  source = "../modules/tfstate"
+  source               = "../modules/tfstate"
+  resource_group_name  = var.state_resource_group_name
+  storage_account_name = var.state_storage_account_name
+  tags = {
+    project = "pipeline-foundation"
+    owner   = var.owner
+  }
 }
 
 module "oidc" {

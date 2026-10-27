@@ -1,5 +1,6 @@
 # Copy to the project's backend.tf after the shared state account exists.
-# Change only the blob key. One blob per project.
+# If you changed the keep group or account names, change those lines too.
+# Then change the blob key. One blob per project.
 
 terraform {
   backend "azurerm" {

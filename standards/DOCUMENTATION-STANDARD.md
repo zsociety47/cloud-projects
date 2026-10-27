@@ -3,7 +3,7 @@
 How every project in this portfolio is documented. This sits in `cloud-projects/standards/` next to `README-TEMPLATE.md` and `DIAGRAM-STANDARD.md`. Those two files stay the source of truth for the README layout and the diagram style. This file adds the rules around them: what gets written, when, and what "done" means.
 
 ## 1. Principles
-1. **Reproducible.** A stranger can rebuild the project from the README alone, without asking me anything.
+1. **Reproducible.** A stranger can rebuild the project from the README alone, without asking me anything. Automated setup starts with **Run this as yourself**: how to replace my owner word, my resource names, and my GitHub ids. Defaults in code stay this proof of concept. Videos are not reshot for that paragraph.
 2. **Recruiter on top, engineer on the bottom.** The first screen answers "what is this and why does it matter" in 30 seconds. Technical depth lives lower down.
 3. **Proof over claims.** Every success criterion is backed by a screenshot, a command output, or a `verify` result. No criterion is marked ✅ until it has actually been checked.
 4. **Honest.** Failures, gotchas and what I'd change are documented. They are the most credible part.

@@ -29,6 +29,12 @@ Reusable GitHub Actions jobs for Azure: [`azure-terraform-plan.yml`](../../.gith
 
 Do not apply these modules from GitHub. The runner cannot create the Entra app it uses to sign in.
 
+## Run this as yourself
+
+The defaults (`rg-tfstate-zeon01`, `sttfstatezeon01`, `owner = zeon`) are this proof of concept. Copy `pipeline-foundation/terraform.tfvars.example` to `terraform.tfvars` and put your owner word in the names. Storage account names are lowercase letters and digits only, and they must be unique across Azure. After the first apply, write `backend.tf` with those same names. Do not copy the `zsociety47` GitHub ids from the example `projects` map. Get yours with `modules/github-oidc/scripts/oidc-ids.sh owner/name`.
+
+The reusable jobs at `zsociety47/cloud-projects/.github/workflows/azure-terraform-*.yml` are public. You can call them from your repository, or fork this repository and point `uses:` at your fork.
+
 ## Honest state
 
 Applied Oct 26, 2026 from the laptop. `rg-tfstate-zeon01` (`lifetime=keep`) and `sttfstatezeon01` / container `tfstate` exist. State blob is `pipeline-foundation.tfstate`. `projects = {}`, so no Entra apps yet. A follow-up plan was no changes. Do not recreate Project 7's groups.

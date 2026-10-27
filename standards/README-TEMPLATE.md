@@ -60,6 +60,10 @@ Part of [Cloud Projects](https://github.com/zsociety47/cloud-projects).
 
 ## Automated setup
 
+### Run this as yourself
+
+The names in this repository are this proof of concept. Copy `<terraform.tfvars.example, .env.example, or the config file>` and put your owner word in every globally unique name (resource groups that include `zeon01`, storage accounts, Key Vaults, SQL servers, bucket names). Change the `owner` tag. Do not copy my GitHub numeric ids. Then the rest of Automated setup.
+
 <Prerequisites, then one heading per action: sign in, init, plan, apply, each direct check, verify, teardown. Under each heading, say what the reader is doing and what they should see before the next command. Do not stack those commands in one block.>
 
 ---
