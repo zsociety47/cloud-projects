@@ -62,7 +62,18 @@ Part of [Cloud Projects](https://github.com/zsociety47/cloud-projects).
 
 ### Run this as yourself
 
-The names in this repository are this proof of concept. Copy `<terraform.tfvars.example, .env.example, or the config file>` and put your owner word in every globally unique name (resource groups that include `zeon01`, storage accounts, Key Vaults, SQL servers, bucket names). Change the `owner` tag. Do not copy my GitHub numeric ids. Then the rest of Automated setup.
+The names committed in this repository are this proof of concept. Leave them. Put your owner word in the copy you run. The sequence is the same as the [naming standard](https://github.com/zsociety47/cloud-projects/blob/main/standards/NAMING-STANDARD.md): type, project or role, environment, then **your** owner word and number on top-level names only (`rg-tf-poc-zeon01` becomes `rg-tf-poc-<yourword>01`).
+
+| Open this | Do this |
+|---|---|
+| [`terraform.tfvars.example`](terraform.tfvars.example) | Copy to `terraform.tfvars` (gitignored). Replace `yourname` / `yourname01` with your owner word. Change `tags.owner`. Leave inside-the-group names (`snet-backend`, `nsg-web`). |
+| [`variables.tf`](variables.tf) | Read only. These defaults are this proof. Do not edit them to match yours. |
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+```
+
+Then the rest of Automated setup, using the names you just set. Do not copy numeric GitHub ids from this repository; ask GitHub for yours.
 
 <Prerequisites, then one heading per action: sign in, init, plan, apply, each direct check, verify, teardown. Under each heading, say what the reader is doing and what they should see before the next command. Do not stack those commands in one block.>
 

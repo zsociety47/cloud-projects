@@ -31,7 +31,18 @@ Do not apply these modules from GitHub. The runner cannot create the Entra app i
 
 ## Run this as yourself
 
-The defaults (`rg-tfstate-zeon01`, `sttfstatezeon01`, `owner = zeon`) are this proof of concept. Copy `pipeline-foundation/terraform.tfvars.example` to `terraform.tfvars` and put your owner word in the names. Storage account names are lowercase letters and digits only, and they must be unique across Azure. After the first apply, write `backend.tf` with those same names. Do not copy the `zsociety47` GitHub ids from the example `projects` map. Get yours with `modules/github-oidc/scripts/oidc-ids.sh owner/name`.
+The names committed here are this proof of concept. Leave them. Put your owner word in the copy you run. The sequence is the same as the [naming standard](../../standards/NAMING-STANDARD.md): type, project, then **your** owner word and number (`rg-tfstate-zeon01` becomes `rg-tfstate-ada01`).
+
+| Open this | Do this |
+|---|---|
+| [`pipeline-foundation/terraform.tfvars.example`](pipeline-foundation/terraform.tfvars.example) | Copy to `pipeline-foundation/terraform.tfvars`. Uncomment and set `owner`, `state_resource_group_name`, and `state_storage_account_name`. Storage account names are lowercase letters and digits only. |
+| [`pipeline-foundation/variables.tf`](pipeline-foundation/variables.tf) | Read only. These defaults are this proof. |
+| [`examples/backend.tf.example`](examples/backend.tf.example) | After the first apply, copy to the later project's `backend.tf` and put the same group and account names there. Change only the blob `key`. |
+| [`modules/github-oidc/scripts/oidc-ids.sh`](modules/github-oidc/scripts/oidc-ids.sh) | Run `oidc-ids.sh owner/name` for **your** repository. Do not copy the `zsociety47` GitHub ids from the example `projects` map. |
+
+```bash
+cp pipeline-foundation/terraform.tfvars.example pipeline-foundation/terraform.tfvars
+```
 
 The reusable jobs at `zsociety47/cloud-projects/.github/workflows/azure-terraform-*.yml` are public. You can call them from your repository, or fork this repository and point `uses:` at your fork.
 

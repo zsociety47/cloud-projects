@@ -3,7 +3,7 @@
 How every project in this portfolio is documented. This sits in `cloud-projects/standards/` next to `README-TEMPLATE.md` and `DIAGRAM-STANDARD.md`. Those two files stay the source of truth for the README layout and the diagram style. This file adds the rules around them: what gets written, when, and what "done" means.
 
 ## 1. Principles
-1. **Reproducible.** A stranger can rebuild the project from the README alone, without asking me anything. Automated setup starts with **Run this as yourself**: how to replace my owner word, my resource names, and my GitHub ids. Defaults in code stay this proof of concept. Videos are not reshot for that paragraph.
+1. **Reproducible.** A stranger can rebuild the project from the README alone, without asking me anything. Automated setup starts with **Run this as yourself** (section 4a): a table of linked files that says which name slot to replace. Defaults in code stay this proof of concept. Videos are not reshot for that paragraph.
 2. **Recruiter on top, engineer on the bottom.** The first screen answers "what is this and why does it matter" in 30 seconds. Technical depth lives lower down.
 3. **Proof over claims.** Every success criterion is backed by a screenshot, a command output, or a `verify` result. No criterion is marked ✅ until it has actually been checked.
 4. **Honest.** Failures, gotchas and what I'd change are documented. They are the most credible part.
@@ -38,7 +38,7 @@ Follow `standards/README-TEMPLATE.md` for the exact layout. The order is:
 2. Video section (animated thumbnail GIF linking to the video)
 3. **At a glance**: what it is, the business problem, the result, tools used (recruiter-friendly)
 4. **Project steps**: the manual walkthrough, numbered. Every step has an "Automated by ..." line pointing to the script or function that does it, and a screenshot slot
-5. **Automated setup**: prerequisites, setup, deploy, verify, teardown commands, copy-pasteable
+5. **Automated setup**: **Run this as yourself** first (section 4a), then prerequisites, setup, deploy, verify, teardown commands, copy-pasteable
 6. **Architecture**: Mermaid diagram plus a "How to read this diagram" key
 7. **Hypothesis**
 8. **Success criteria**: a checklist, each ✅ tied to evidence
@@ -49,6 +49,29 @@ Follow `standards/README-TEMPLATE.md` for the exact layout. The order is:
 13. **Technical findings**: every gotcha, with the error text, the cause and the fix
 
 If the video was recorded before a README restructure, add a one-line note under the video saying the layout has changed.
+
+## 4a. Run this as yourself
+
+This heading is required in Automated setup on every project, including Azure 8 and 9 and every later cloud. It is how another person produces the same build under their own names. Do not skip it, and do not put the deploy commands above it.
+
+Required shape, in this order:
+
+1. One short paragraph: the names committed in this repository are this proof of concept; leave them; replace only the owner-and-number slot (`zeon01` → their word and number). Link [NAMING-STANDARD.md](NAMING-STANDARD.md).
+2. A table. The first column is a relative markdown link to the file they open. The second column is the action: copy this to that, change these keys. Every file they must touch has a row.
+3. A copy-paste command when the override is a file (`cp terraform.tfvars.example terraform.tfvars`).
+4. Then the rest of Automated setup, using the names they just set.
+
+How the override is supplied, by project type:
+
+| Project type | What they open | What they run |
+|---|---|---|
+| Terraform | `terraform.tfvars.example` | Copy to `terraform.tfvars` (gitignored). Defaults in `variables.tf` stay this proof. |
+| Python | `src/lib/config.py` | Change the listed constants in their copy. Keep any guest script that repeats a globally unique name in step. |
+| Shell | the deploy script, or `.env.example` | Pass a suffix, or copy `.env.example` to `.env`. |
+
+Do not rewrite committed defaults to `yourname`. The video, the screenshots, and this proof keep `zeon01`. A later operator changes the copy they run, not the published evidence.
+
+Azure projects 1 through 6 already have this table. Copy that shape; do not invent a new one.
 
 ## 5. Screenshots
 - Save to `docs/images/` as `step-NN-short-description.jpg` (or `.png`).
@@ -97,6 +120,7 @@ Follow `standards/DIAGRAM-STANDARD.md`. Mermaid in the README. Diagrams show the
 ## 10. Definition of done
 A project is not done until all of these are true:
 - [ ] README follows the structure in section 4, with no placeholder text except the deliberate `LINKEDIN_LINK_HERE`
+- [ ] **Run this as yourself** lists every file a later operator must change, each as a relative link, and says which slot of the name to replace (`zeon01` → their owner word and number)
 - [ ] Every success criterion has evidence and is checked ✅ only after verification
 - [ ] A clean-slate test: the README's commands were followed from scratch (or by a fresh copy of the repo) and worked
 - [ ] Technical findings section is filled in from the running log

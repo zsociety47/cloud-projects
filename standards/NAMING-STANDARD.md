@@ -150,12 +150,28 @@ Standard tag set on every resource group, starting with project 7 (required, no 
 
 ---
 
-## 7. Before you add a name
+## 7. Someone else running this
+
+The names in a published repository stay this proof (`zeon01`, `owner = zeon`). A later operator does not rename those committed values. They open the files the README **Run this as yourself** table links, and they replace only the owner-and-number slot.
+
+| This proof | Their copy |
+|---|---|
+| `rg-tf-poc-zeon01` | `rg-tf-poc-ada01` |
+| `kv-paas-zeon01` | `kv-paas-ada01` |
+| `sttfpipepoczeon01` | `sttfpipepocada01` (storage accounts: no hyphens) |
+| `owner = zeon` | `owner = ada` |
+
+Inside-the-group names (`snet-backend`, `nsg-web`) stay. They only have to be unique in the group, and the group name already has the owner.
+
+Every new project ships that table. Azure projects 1 through 6 already have it. The README shape is in [DOCUMENTATION-STANDARD.md](DOCUMENTATION-STANDARD.md) section 4a.
+
+## 8. Before you add a name
 
 - [ ] Does it start with the Microsoft abbreviation for that resource type?
 - [ ] Can you read it out loud as a sentence?
 - [ ] Is it the shortest name that is still unique where it has to be?
-- [ ] Top-level and globally unique? Add `zeon01`.
+- [ ] Top-level and globally unique? Add `zeon01` in this proof; a later operator replaces that slot only.
 - [ ] No dates, no "lab", nothing that will change?
 - [ ] Does every new resource group carry `lifetime`, `owner`, `project`, and `created`?
 - [ ] Variable written in whole words, ending in its attribute?
+- [ ] Does **Run this as yourself** link the file that holds this name?
