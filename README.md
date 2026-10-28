@@ -51,6 +51,7 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 | 5 | [Governance guardrails on Azure](https://github.com/zsociety47/azure-governance-poc) | A reader is limited to one resource group, policy blocks an oversized virtual machine before it is created, and a budget alerts as spend nears the monthly limit | [Loom](https://www.loom.com/share/6f35ccb43dbb4a57b4905d501d9b9163) | Complete |
 | 6 | [Migrate a Windows Server from AWS to Azure](https://github.com/zsociety47/azure-aws-migrate-poc) | A Windows Server on Amazon Web Services (AWS) can be discovered, assessed, replicated, and cut over to Azure | Pending | In progress |
 | 7 | [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc) | A pull request plans and tests a Terraform change, and only the main branch can apply it, with no Azure password stored in GitHub | Pending | In progress |
+| 9 | [Backup system](https://github.com/zsociety47/azure-backup-system) | Geo-redundant storage keeps previous versions and a 30-day soft delete, and an alert fires if a day passes with no writes | Pending | In progress |
 
 ## Google Cloud
 
