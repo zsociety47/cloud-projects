@@ -56,7 +56,7 @@ This heading is required in Automated setup on every project, including Azure 8 
 
 Required shape, in this order:
 
-1. One short paragraph: the names committed in this repository are this proof of concept; leave them; replace only the owner-and-number slot (`zeon01` → their word and number). Link [NAMING-STANDARD.md](NAMING-STANDARD.md).
+1. One short paragraph that says the names in this repository are the author's own proof of concept, to leave them alone, and to swap only the short name and number in the copy they run (`zeon01` → `ada01`). Link [NAMING-STANDARD.md](NAMING-STANDARD.md).
 2. A table. The first column is a relative markdown link to the file they open. The second column is the action: copy this to that, change these keys. Every file they must touch has a row.
 3. A copy-paste command when the override is a file (`cp terraform.tfvars.example terraform.tfvars`).
 4. Then the rest of Automated setup, using the names they just set.
@@ -79,6 +79,13 @@ Azure projects 1 through 6 already have this table. Copy that shape; do not inve
 - Every screenshot has alt text describing what it proves.
 - Crop to the relevant part. Redact first (section 6).
 
+### First running pass
+The first time a project is applied, capture the shot list for that pass before teardown. A screen that only exists while the resources are on (a running machine, a firewall rule, a portal page, a quota page) is photographed then. Do not destroy that pass and rebuild later only to take the pictures.
+
+The private shot list is the checklist for the pass. Before teardown, every row that this pass can prove is either captured or marked with the reason it could not be taken. A row left as "Missing" after the resources are gone means the pass failed this rule.
+
+When a later change makes a shot show the wrong fact, replace that file and update the shot-list status. Shots the change did not affect stay. The README keeps the commented line until the replacement file exists. Replacing a shot is expected. Rebuilding a whole project because the first pass was never photographed is the waste this rule prevents.
+
 ## 6. Public-safety checklist (run before every commit)
 - No passwords, keys, tokens, connection strings or `.pem`/`.key` files, in the repo or in screenshots.
 - No subscription IDs, tenant IDs, personal email addresses or public IP addresses I don't intend to share. Client IDs and resource names are fine only if the app registration is deleted or the value is not a secret.
@@ -88,7 +95,7 @@ Azure projects 1 through 6 already have this table. Copy that shape; do not inve
 ## 7. Document as you go
 - After each build phase, append to the findings log: what I did, what failed (exact error text), the cause, the fix.
 - Do not reconstruct the findings from memory at the end. Gotchas found during the build are the content that makes the project credible.
-- At the end of each phase, update the README step for that phase and mark which screenshots are still needed.
+- At the end of each phase, update the README step for that phase. Capture the screenshots that phase made possible before anything from that phase is destroyed. Mark any shot that is still impossible, and why.
 
 ## 7c. Compared with the previous project
 
@@ -120,11 +127,11 @@ Follow `standards/DIAGRAM-STANDARD.md`. Mermaid in the README. Diagrams show the
 ## 10. Definition of done
 A project is not done until all of these are true:
 - [ ] README follows the structure in section 4, with no placeholder text except the deliberate `LINKEDIN_LINK_HERE`
-- [ ] **Run this as yourself** lists every file a later operator must change, each as a relative link, and says which slot of the name to replace (`zeon01` → their owner word and number)
+- [ ] **Run this as yourself** lists every file a later operator must change, each as a relative link, and says which slot of the name to replace (`zeon01` → their short name and number)
 - [ ] Every success criterion has evidence and is checked ✅ only after verification
 - [ ] A clean-slate test: the README's commands were followed from scratch (or by a fresh copy of the repo) and worked
 - [ ] Technical findings section is filled in from the running log
-- [ ] Screenshots are captured, redacted and linked (or consciously deferred and listed)
+- [ ] Screenshots from the first running pass are captured, redacted, and linked. A shot is deferred only when that pass could not show it, and the shot list says why. Shots replaced after a later change are the current files.
 - [ ] Public-safety checklist passed
 - [ ] Hub README row added or updated
 - [ ] Video script (from the template) and shot list exist in `loom-notes`, and the recorded video was checked against them

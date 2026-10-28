@@ -33,7 +33,7 @@ To confirm the script itself works without touching Azure, run `./test/test-envc
 
 Azure resource groups use tags. Google Cloud projects use labels (lowercase keys and values). AWS uses tags on each resource. The names and values are the same on all three.
 
-Anything you want to keep: do not tag it `lifetime=1d`. Use `lifetime=keep`. The sweep ignores it.
+Anything you want to keep: don't tag it `lifetime=1d`. Use `lifetime=keep`. The sweep ignores it.
 
 ## Terraform snippet
 
@@ -68,7 +68,7 @@ For a group made with the Azure CLI: `az group create ... --tags lifetime=1d own
 ./envctl.sh --cloud all     # Azure, Google Cloud, and AWS. Add --apply to delete.
 ```
 
-`envctl-aws.sh` and `envctl-gcp.sh` accept `--apply` and `--min-age`. They do not accept `--cloud`. A dry run is the way to check them.
+`envctl-aws.sh` and `envctl-gcp.sh` accept `--apply` and `--min-age`. They don't accept `--cloud`. A dry run is the way to check them.
 
 Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscription id, account id, or sign-in name.
 
@@ -79,15 +79,15 @@ Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscript
 ./install-launchd.sh --remove
 ```
 
-Run these on the Mac itself, not from Claude's cloud session (it cannot reach macOS launchd or the Azure CLI). If the Mac is asleep at 11:30 PM, the job runs when it wakes. You must be signed in (`az login`); if you are not, the run logs that and deletes nothing.
+Run these on the Mac itself, not from Claude's cloud session (it can't reach macOS launchd or the Azure CLI). If the Mac is asleep at 11:30 PM, the job runs when it wakes. You must be signed in (`az login`); if you aren't, the run logs that and deletes nothing.
 
 ## What it does not clean up, and the check that watches for it
 
-Deleting a resource group does not remove Entra users and app registrations, subscription-level policies and budgets, or the reserved names of soft-deleted Key Vaults. Only `terraform destroy` removes the first three.
+Deleting a resource group doesn't remove Entra users and app registrations, subscription-level policies and budgets, or the reserved names of soft-deleted Key Vaults. Only `terraform destroy` removes the first three.
 
 Every run ends with a leftover check, and `./envctl.sh --check` runs only that. It looks for:
 
-- Terraform state that still lists resources (the sign that `terraform destroy` was not run), under `ENVCTL_PROJECTS_DIR` (default `~/Desktop/cloud-portfolio`)
+- Terraform state that still lists resources (the sign that `terraform destroy` wasn't run), under `ENVCTL_PROJECTS_DIR` (default `~/Desktop/cloud-portfolio`)
 - Entra users and app registrations whose names match `ENVCTL_ENTRA_MATCH` (default `zeon01|junior-dev`)
 - Policy assignments and budgets with `zeon01` in the name
 - Soft-deleted Key Vaults
@@ -99,7 +99,7 @@ If anything is found it prints `WARNING` lines, shows a macOS notification, and 
 | Cloud | Status |
 |---|---|
 | Azure | Deletes resource groups tagged `lifetime=1d`. |
-| Google Cloud | Deletes projects labeled `lifetime=1d`. A `created` label cannot contain a colon, so write it as `2026-10-25t14-05-00z`. |
+| Google Cloud | Deletes projects labeled `lifetime=1d`. A `created` label can't contain a colon, so write it as `2026-10-25t14-05-00z`. |
 | Amazon Web Services | Terminates instances; deletes volumes, snapshots, load balancers, databases (no final snapshot) and buckets with their contents; removes NAT gateways; releases addresses. All must be tagged `lifetime=1d`. Virtual networks stay until `terraform destroy`. |
 
 A dry run is still the default. `--apply` is what deletes. The nightly job uses `--cloud all` only after you run `./install-launchd.sh` again. An agent installed earlier still cleans Azure only.

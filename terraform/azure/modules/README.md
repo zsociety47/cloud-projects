@@ -15,6 +15,6 @@ Exact GitHub paths:
 - https://github.com/zsociety47/cloud-projects/tree/main/terraform/azure/modules/tfstate
 - https://github.com/zsociety47/cloud-projects/tree/main/terraform/azure/modules/github-oidc
 
-Do not apply a module by itself. Apply `pipeline-foundation` on the laptop after Zeon types the go-ahead. Nothing here has been applied yet.
+Don't apply a module by itself. Apply `pipeline-foundation` on the laptop after Zeon types the go-ahead. The `tfstate` module has been applied through `pipeline-foundation`, but `github-oidc` hasn't been applied for any project yet.
 
 Numeric GitHub ids for OpenID Connect (OIDC) come from [`github-oidc/scripts/oidc-ids.sh`](github-oidc/scripts/oidc-ids.sh).

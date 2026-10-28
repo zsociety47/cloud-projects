@@ -1,5 +1,6 @@
-# Copy to terraform.tfvars (gitignored). Defaults are this proof of
-# concept. Change owner and the two state names if you are not zeon.
+# Copy this to terraform.tfvars (it's gitignored). The defaults are the names
+# from my own proof of concept. If you're not me (zeon), set owner and the two
+# state names.
 # Leave projects empty until a project's resource group exists.
 # Get GitHub ids from:
 #   ../modules/github-oidc/scripts/oidc-ids.sh owner/name

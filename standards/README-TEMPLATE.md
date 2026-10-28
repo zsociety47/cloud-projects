@@ -15,7 +15,7 @@ Copy everything below the line into a new project's `README.md`, then replace ea
 
 <!-- Optional: workflow status badge -->
 
-## 🎬 Watch Me Build This Lab!
+## 🎬 Watch the walkthrough
 
 [![Watch the video](docs/images/loom-thumbnail.png)](<loom-link>)
 
@@ -62,12 +62,12 @@ Part of [Cloud Projects](https://github.com/zsociety47/cloud-projects).
 
 ### Run this as yourself
 
-The names committed in this repository are this proof of concept. Leave them. Put your owner word in the copy you run. The sequence is the same as the [naming standard](https://github.com/zsociety47/cloud-projects/blob/main/standards/NAMING-STANDARD.md): type, project or role, environment, then **your** owner word and number on top-level names only (`rg-tf-poc-zeon01` becomes `rg-tf-poc-<yourword>01`).
+The names in this repository are the ones I used for my own proof of concept, so leave them as they are. Make your own copy and swap my short name (`zeon`) for yours. The names follow the [naming standard](https://github.com/zsociety47/cloud-projects/blob/main/standards/NAMING-STANDARD.md): type, project or role, environment, then your short name and a number on top-level names only (`rg-tf-poc-zeon01` becomes `rg-tf-poc-<your-short-name>01`).
 
 | Open this | Do this |
 |---|---|
-| [`terraform.tfvars.example`](terraform.tfvars.example) | Copy to `terraform.tfvars` (gitignored). Replace `yourname` / `yourname01` with your owner word. Change `tags.owner`. Leave inside-the-group names (`snet-backend`, `nsg-web`). |
-| [`variables.tf`](variables.tf) | Read only. These defaults are this proof. Do not edit them to match yours. |
+| [`terraform.tfvars.example`](terraform.tfvars.example) | Copy to `terraform.tfvars` (gitignored). Replace `yourname` / `yourname01` with your short name, and change `tags.owner` to your name. Leave inside-the-group names (`snet-backend`, `nsg-web`) alone. |
+| [`variables.tf`](variables.tf) | Leave this one alone. Its defaults are the names from my own proof, so don't edit them to match yours. |
 
 ```bash
 cp terraform.tfvars.example terraform.tfvars

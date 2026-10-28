@@ -31,12 +31,12 @@ Do not apply these modules from GitHub. The runner cannot create the Entra app i
 
 ## Run this as yourself
 
-The names committed here are this proof of concept. Leave them. Put your owner word in the copy you run. The sequence is the same as the [naming standard](../../standards/NAMING-STANDARD.md): type, project, then **your** owner word and number (`rg-tfstate-zeon01` becomes `rg-tfstate-ada01`).
+The names in this folder are the ones I used for my own proof of concept, so leave them as they are. Make your own copy and swap my short name (`zeon`) for yours. The names follow the [naming standard](../../standards/NAMING-STANDARD.md): type, project, then your short name and a number (`rg-tfstate-zeon01` becomes `rg-tfstate-ada01`).
 
 | Open this | Do this |
 |---|---|
 | [`pipeline-foundation/terraform.tfvars.example`](pipeline-foundation/terraform.tfvars.example) | Copy to `pipeline-foundation/terraform.tfvars`. Uncomment and set `owner`, `state_resource_group_name`, and `state_storage_account_name`. Storage account names are lowercase letters and digits only. |
-| [`pipeline-foundation/variables.tf`](pipeline-foundation/variables.tf) | Read only. These defaults are this proof. |
+| [`pipeline-foundation/variables.tf`](pipeline-foundation/variables.tf) | Leave this one alone. Its defaults are the names from my own proof. |
 | [`examples/backend.tf.example`](examples/backend.tf.example) | After the first apply, copy to the later project's `backend.tf` and put the same group and account names there. Change only the blob `key`. |
 | [`modules/github-oidc/scripts/oidc-ids.sh`](modules/github-oidc/scripts/oidc-ids.sh) | Run `oidc-ids.sh owner/name` for **your** repository. Do not copy the `zsociety47` GitHub ids from the example `projects` map. |
 
@@ -48,7 +48,7 @@ The reusable jobs at `zsociety47/cloud-projects/.github/workflows/azure-terrafor
 
 ## Honest state
 
-Applied Oct 26, 2026 from the laptop. `rg-tfstate-zeon01` (`lifetime=keep`) and `sttfstatezeon01` / container `tfstate` exist. State blob is `pipeline-foundation.tfstate`. `projects = {}`, so no Entra apps yet. A follow-up plan was no changes. Do not recreate Project 7's groups.
+Applied Oct 26, 2026 from the laptop. `rg-tfstate-zeon01` (`lifetime=keep`) and `sttfstatezeon01` / container `tfstate` exist. The state blob is `pipeline-foundation.tfstate`. `projects = {}`, so there are no Entra apps yet, and a follow-up plan showed no changes. Do not recreate Project 7's groups.
 
 Project 6 (AWS to Azure migrate) stays off this pipeline.
 
