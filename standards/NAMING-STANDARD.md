@@ -183,7 +183,7 @@ Every new project ships that table. Azure projects 1 through 6 already have it. 
 
 ## 9. Google Cloud
 
-Checked October 27, 2026 against the `gcloud projects create` reference, the Resource Manager page "Create projects", and the Identity and Access Management discovery document for `CreateServiceAccountRequest`.
+Checked October 27, 2026 against the `gcloud projects create` reference, the Resource Manager page "Create projects", and the Identity and Access Management discovery document for `CreateServiceAccountRequest`. Cloud SQL instance ids, secret ids, database names, and the Private Services Access range were checked October 28, 2026 against the Cloud SQL for PostgreSQL instance settings page, the delete-instance page, the users page, the databases page, the Secret Manager `projects.secrets.create` reference, and the Virtual Private Cloud page "Configure private services access".
 
 Google Cloud publishes no abbreviation list. This portfolio keeps these stems so a name reads the same way from one cloud to the next:
 
@@ -193,7 +193,10 @@ Google Cloud publishes no abbreviation list. This portfolio keeps these stems so
 | `snet` | subnet | Subnet | `snet-web` |
 | `vm` | virtual machine | Compute Engine instance | `vm-web-01` |
 | `sa` | service account | Service account | `sa-web` |
-| `ip` | Internet Protocol address | Reserved external address | `ip-web-01` |
+| `ip` | Internet Protocol address | Reserved address. External, or a global range for Private Services Access | `ip-web-01`, `ip-sql-range` |
+| `router` | Cloud Router | Cloud Router | `router-paas-poc` |
+| `nat` | Network Address Translation | Cloud NAT gateway | `nat-paas-poc` |
+| `sql` | Cloud SQL | Cloud SQL instance | `sql-paas-zeon01-b1` |
 
 Azure's network stem is `vnet`. On Google Cloud the same idea uses `vpc`, because that is the product name. The other stems match Azure.
 
@@ -217,3 +220,13 @@ Display name (the human name, not the id): 4 to 30 characters. Letters, digits, 
 Service account id, from the Identity and Access Management API: 6 to 30 characters, starting with a lowercase letter. `sa-web` fits. `sa-db` is 5 characters and does not. Do not shorten a stem to sneak under a limit. Lengthen the role (`sa-db-01`) and say so before the first create.
 
 Labels, not tags. The same four keys as every other cloud: `lifetime`, `owner`, `project`, `created`. A label value cannot contain a colon, so `created` looks like `2026-10-26t23-45-00z`. Keys start with a lowercase letter. Values are lowercase letters, digits, hyphens, and underscores. The nightly sweep reads `lifetime=1d`.
+
+Cloud SQL instance id, from the instance settings page: lowercase letters, digits, and hyphens, starts with a letter, 98 characters or fewer. Unique inside the project, not across Google Cloud. The PostgreSQL delete page read the same day says a deleted name can be reused immediately. The example `sql-paas-zeon01-b1` still carries an owner slot and a build number because an older rule held the name for about a week. That owner slot is not the usual "top level only" pattern. Leave it until the proof decides the name.
+
+Secret id, from `projects.secrets.create`: unique inside the project, at most 255 characters, letters, digits, hyphens, and underscores. Example: `paas-db-password`.
+
+Database name, from the Cloud SQL for PostgreSQL databases page: at most 64 characters. This portfolio also keeps it a plain PostgreSQL identifier, so no hyphen. Example: `appdb`. User names follow the same idea. Example: `webapp`. A built-in user created without other database roles is granted `cloudsqlsuperuser`. Assign other roles when the user must not be that.
+
+`nat` is the product word on Google Cloud. Azure's abbreviation `ng` is not used here.
+
+`ip-sql-range` is a global allocated range for Private Services Access, not an external address. The smallest prefix Google documents is `/24`. `/16` is the size they recommend. A one-instance proof uses `/24`. The range must not overlap a subnet.

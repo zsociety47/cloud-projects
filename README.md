@@ -36,7 +36,9 @@ Each of those folders has its own README. The walkthrough of building the Azure 
 
 ## Roadmap
 
-Azure first, then the same six projects rebuilt on Google Cloud and AWS, each one better than the last time. After that: a landing-zone series, a Kubernetes series, and more Azure projects. [Full roadmap](ROADMAP.md).
+Azure first, then the same ideas rebuilt on Google Cloud and Amazon Web Services (AWS), each one better than the last time. After that: a landing-zone series, a Kubernetes series, and more Azure projects. [Full roadmap](ROADMAP.md) — including **where we stand** on Azure 6 (discovery proven; replication held on the AWS virtual central processing unit quota; variant B prepared).
+
+**Now:** Azure 1–5 complete. Azure 6 is the recording focus (path B while AWS On-Demand Standard vCPUs stay at 8). Azure 7 pipeline work continues in parallel. Shared Azure Terraform modules and the nightly environment sweep live in this hub.
 
 ---
 
@@ -49,8 +51,9 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 | 3 | [Managed SQL and Key Vault on Azure](https://github.com/zsociety47/azure-sql-keyvault-poc) | An app VM reads its database password from Key Vault with a managed identity, and its role can't write secrets | [Loom](https://www.loom.com/share/326b50f1396142d9848704c6918908b5) | Complete |
 | 4 | [Infrastructure as Code with Terraform on Azure](https://github.com/zsociety47/azure-terraform-iac-poc) | A virtual network can be described in Terraform, gain a firewall after it already exists, and be removed with one command | [Loom](https://www.loom.com/share/b0448fef104a4bdc90a3d7c63cad2014) | Complete |
 | 5 | [Governance guardrails on Azure](https://github.com/zsociety47/azure-governance-poc) | A reader is limited to one resource group, policy blocks an oversized virtual machine before it is created, and a budget alerts as spend nears the monthly limit | [Loom](https://www.loom.com/share/6f35ccb43dbb4a57b4905d501d9b9163) | Complete |
-| 6 | [Migrate a Windows Server from AWS to Azure](https://github.com/zsociety47/azure-aws-migrate-poc) | A Windows Server on Amazon Web Services (AWS) can be discovered, assessed, replicated, and cut over to Azure | Pending | In progress |
+| 6 | [Migrate a Windows Server from AWS to Azure](https://github.com/zsociety47/azure-aws-migrate-poc) | A Windows Server on AWS can be discovered, assessed, replicated, and cut over to Azure | Pending | In progress — discovery proven; replication held on AWS vCPU quota (applied 8); variant B prepared |
 | 7 | [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc) | A pull request plans and tests a Terraform change, and only the main branch can apply it, with no Azure password stored in GitHub | Pending | In progress |
+| 8 | [Cost visibility dashboard](https://github.com/zsociety47/azure-cost-dashboard) | Spend by service and resource group is visible with a budget alert before the month is spent | Pending | In progress |
 | 9 | [Backup system](https://github.com/zsociety47/azure-backup-system) | Geo-redundant storage keeps previous versions and a 30-day soft delete, and an alert fires if a day passes with no writes | Pending | In progress |
 
 ## Google Cloud
@@ -59,6 +62,7 @@ Azure first, then the same six projects rebuilt on Google Cloud and AWS, each on
 |---|---------|----------------|-------------|--------|
 | 1 | [Static website on Cloud Storage](https://github.com/zsociety47/gcp-static-website-poc) | A public website can be served from a Cloud Storage bucket with no server to manage | Pending | In progress |
 | 2 | [Two-tier network](https://github.com/zsociety47/gcp-two-tier-network-poc) | A database with no public address is reachable only from the web tier | Pending | In progress |
+| 3 | Managed database and secrets | A virtual machine reads a database password from Secret Manager and queries Cloud SQL on a private address | Pending | In progress |
 
 ## Amazon Web Services
 

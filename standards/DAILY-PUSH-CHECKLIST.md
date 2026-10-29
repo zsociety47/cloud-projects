@@ -17,6 +17,7 @@ The folder is `~/Desktop/cloud-portfolio`. Project repos live in `azure/`, `gcp/
 | 01-azure-static-website-poc | the public tracker site (progress.json) |
 | gcp/01-gcp-static-website-poc | static website on Cloud Storage |
 | gcp/02-gcp-two-tier-network-poc | two-tier network, in progress |
+| gcp/03-gcp-sql-keyvault-poc | managed database and secrets, local only, no remote yet |
 | aws/01-aws-static-website-poc | static website on CloudFront |
 | 02 to 05 azure poc repos | finished projects |
 | 07-azure-terraform-pipeline-poc | in progress |
