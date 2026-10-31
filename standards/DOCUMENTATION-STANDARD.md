@@ -69,6 +69,8 @@ How the override is supplied, by project type:
 | Python | `src/lib/config.py` | Change the listed constants in their copy. Keep any guest script that repeats a globally unique name in step. |
 | Shell | the deploy script, or `.env.example` | Pass a suffix, or copy `.env.example` to `.env`. |
 
+When a project needs an administrator password (tfvars or `TF_VAR_…`), point **Run this as yourself** at `scripts/gen-password.sh` in that repo (same script as [`scripts/gen-password.sh`](scripts/gen-password.sh) here). Operators generate a value that already matches the project's length and character rules, paste it into the gitignored file or export, and never commit it. Do not invent a second generator per variable name; pass `--length` and `--username` instead.
+
 Do not rewrite committed defaults to `yourname`. The video, the screenshots, and this proof keep `zeon01`. A later operator changes the copy they run, not the published evidence.
 
 Azure projects 1 through 6 already have this table. Copy that shape; do not invent a new one.

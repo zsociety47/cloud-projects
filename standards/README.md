@@ -12,3 +12,4 @@ How every project in this portfolio is named, documented, drawn, recorded, and p
 | [`COMMUNICATION-STANDARD.md`](COMMUNICATION-STANDARD.md) | Voice, the seven-question test, LinkedIn post length |
 | [`LINKEDIN-POSTS.md`](LINKEDIN-POSTS.md) | Four posts per project and the recording guide |
 | [`DAILY-PUSH-CHECKLIST.md`](DAILY-PUSH-CHECKLIST.md) | Repos to fetch, commit, and push each session |
+| [`scripts/gen-password.sh`](scripts/gen-password.sh) | Local password generator for gitignored tfvars / `TF_VAR_` exports |
