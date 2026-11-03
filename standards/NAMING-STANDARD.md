@@ -183,7 +183,7 @@ Every new project ships that table. Azure projects 1 through 6 already have it. 
 
 ## 9. Google Cloud
 
-Checked October 27, 2026 against the `gcloud projects create` reference, the Resource Manager page "Create projects", and the Identity and Access Management discovery document for `CreateServiceAccountRequest`. Cloud SQL instance ids, secret ids, database names, and the Private Services Access range were checked October 28, 2026 against the Cloud SQL for PostgreSQL instance settings page, the delete-instance page, the users page, the databases page, the Secret Manager `projects.secrets.create` reference, and the Virtual Private Cloud page "Configure private services access".
+Checked October 27, 2026 against the `gcloud projects create` reference, the Resource Manager page "Create projects", and the Identity and Access Management discovery document for `CreateServiceAccountRequest`. Cloud SQL instance ids, secret ids, database names, and the Private Services Access range were checked October 28, 2026 against the Cloud SQL for PostgreSQL instance settings page, the delete-instance page, the users page, the databases page, the Secret Manager `projects.secrets.create` reference, and the Virtual Private Cloud page "Configure private services access". Virtual Private Cloud names, subnet names, and firewall rule names were checked October 30, 2026 against the Compute Engine page "Naming resources". The same day, provider `hashicorp/google` 8.7.0's schema for `google_compute_network`, `google_compute_subnetwork`, and `google_compute_firewall` had no `labels` argument.
 
 Google Cloud publishes no abbreviation list. This portfolio keeps these stems so a name reads the same way from one cloud to the next:
 
@@ -230,3 +230,5 @@ Database name, from the Cloud SQL for PostgreSQL databases page: at most 64 char
 `nat` is the product word on Google Cloud. Azure's abbreviation `ng` is not used here.
 
 `ip-sql-range` is a global allocated range for Private Services Access, not an external address. The smallest prefix Google documents is `/24`. `/16` is the size they recommend. A one-instance proof uses `/24`. The range must not overlap a subnet.
+
+Virtual Private Cloud names, subnet names, and firewall rule names use the Compute Engine rule: 1 to 63 characters, RFC 1035, matching `^[a-z]([-a-z0-9]*[a-z0-9])?`. The first character is a lowercase letter. The last character is not a hyphen. Examples: `vpc-tf-poc`, `snet-backend`, `deny-all-other-ingress` (23 characters). A firewall rule does not get a short stem in this portfolio. The name says what the rule does, the same way project 2 named `deny-all-other-ingress`. These three resources do not take the four sweep labels. Those labels stay on the project.

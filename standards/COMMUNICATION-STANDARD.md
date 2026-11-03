@@ -42,6 +42,8 @@ From the next script on, every important file is shown twice. Open the file and 
 
 If the proof is an empty list or a refusal, show that page in the portal anyway. If the proof is that something is allowed, create it in the portal, show it, and remove it before the session ends. A denied virtual machine and a virtual machine that actually gets created are both portal shots. Show a test user by display name. Keep the sign-in name off screen when it contains the tenant domain.
 
+**Flow C (nothing running).** When the video is recorded after teardown, the captured screenshot stands for the portal page: open the file, name the setting, then show the dated screenshot of that same object with the same name. Say "this is the shot I took on <date>". Keeping a build running only to open a live page costs money and proves nothing a viewer can check. Before teardown, capture every shot the script needs, including a final resource list and the teardown itself.
+
 Project 5 was recorded before this rule. Do not reshoot it and do not edit that script to add these shots.
 
 ## LinkedIn post (video post about 110 words; every other post about 75 words or fewer)

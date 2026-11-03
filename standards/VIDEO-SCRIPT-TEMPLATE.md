@@ -1,11 +1,11 @@
 # Video script: <Project name>
 
-**FLOW A: live build on camera (under 15 minutes)**  or  **FLOW B: walkthrough (build off camera first).** Keep exactly one of these two lines, right under the title, so the flow is the first thing you see.
+**FLOW A: live build on camera (under 15 minutes)**, **FLOW B: walkthrough (build off camera first)**, or **FLOW C: walkthrough from the record (nothing running).** Keep exactly one of these lines, right under the title, so the flow is the first thing you see.
 
 Private file in `loom-notes/`. One per project. Follows the "Lab Video Recording Flows" guide.
 
 ## Setup
-- Flow: [ ] A (build live on camera, under 15 min)  [ ] B (build off-camera first, then walk through the finished build)
+- Flow: [ ] A (build live on camera, under 15 min)  [ ] B (build off-camera first, then walk through the finished build)  [ ] C (build off-camera, capture every shot, tear down, then record from the shots, the README, and the files)
 - Target length: __ minutes
 - Face on camera for the intro, the build or walkthrough, and the outro (screen share with voiceover alone is not enough)
 - Before recording: environment built and tested, terminal font large, notifications off, secrets and subscription or tenant IDs hidden from the screen, resource group name ready for teardown
@@ -23,6 +23,7 @@ Draft: ...
 ## Part 2: The middle
 **Flow A (live build):** for each step, show it, then say how it works and why you're doing it that way.
 **Flow B (walkthrough):** open the finished architecture. Walk each piece, then say how it works and why it's built that way.
+**Flow C (walkthrough from the record, the default when the build costs money to keep running):** same walk as Flow B, but every portal page is a captured screenshot with its date, and every file is opened on GitHub or locally. Capture all shots and tear the build down before recording. Say plainly that these are captured shots. Never imply a page is live. Put the repo, the README, the architecture picture, and the key files as links in the video description.
 
 **File, then the portal.** For each important file, the middle has a pair of rows. The first row is the file: the setting and the name. The second row is the portal page where that same name is visible. Say the connection out loud: this line is that object.
 

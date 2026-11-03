@@ -11,5 +11,6 @@ How every project in this portfolio is named, documented, drawn, recorded, and p
 | [`VIDEO-SCRIPT-TEMPLATE.md`](VIDEO-SCRIPT-TEMPLATE.md) | Intro, walkthrough, outro, shot list |
 | [`COMMUNICATION-STANDARD.md`](COMMUNICATION-STANDARD.md) | Voice, the seven-question test, LinkedIn post length |
 | [`LINKEDIN-POSTS.md`](LINKEDIN-POSTS.md) | Four posts per project and the recording guide |
+| [`VERIFY-STANDARD.md`](VERIFY-STANDARD.md) | A verify script per apply, a `verify-all.sh`, and a teardown check |
 | [`DAILY-PUSH-CHECKLIST.md`](DAILY-PUSH-CHECKLIST.md) | Repos to fetch, commit, and push each session |
 | [`scripts/gen-password.sh`](scripts/gen-password.sh) | Local password generator for gitignored tfvars / `TF_VAR_` exports |

@@ -79,6 +79,10 @@ Then the rest of Automated setup, using the names you just set. Do not copy nume
 
 ---
 
+### Verify
+
+<Run `./scripts/verify-all.sh` once everything is up. Each apply step above ends with a **Check** line naming its script. See `cloud-projects/standards/VERIFY-STANDARD.md`.>
+
 ## Architecture
 
 <Mermaid diagram following DIAGRAM-STANDARD.md, then the "How to read this diagram" key.>

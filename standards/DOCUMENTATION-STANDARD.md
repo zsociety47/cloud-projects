@@ -137,4 +137,5 @@ A project is not done until all of these are true:
 - [ ] Public-safety checklist passed
 - [ ] Hub README row added or updated
 - [ ] Video script (from the template) and shot list exist in `loom-notes`, and the recorded video was checked against them
+- [ ] Verify scripts exist per [`VERIFY-STANDARD.md`](VERIFY-STANDARD.md): one per apply, `verify-all.sh`, and `verify-teardown.sh`, each run once with its output kept (new projects from the next one; project 6 and earlier are listed in their lessons file)
 - [ ] Teardown tested and the resource group is gone
