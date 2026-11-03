@@ -6,9 +6,9 @@ Every project here is a proof of concept (PoC): a stated hypothesis, success cri
 
 ## Where we stand (November 2026)
 
-Azure projects 1 through 5 are complete, each with a recorded walkthrough. The shared Azure Terraform modules and the laptop pipeline foundation exist under `terraform/azure/`. The nightly environment sweep is in use.
+Azure projects 1 through 6 are complete, each with a recorded walkthrough. The shared Azure Terraform modules and the laptop pipeline foundation exist under `terraform/azure/`. The nightly environment sweep is in use.
 
-**Azure 6 — Migrate a Windows Server from AWS to Azure** is built and torn down. Record the Flow C walkthrough from the dated shots, the README, and the files. Nothing is running.
+**Azure 6 — Migrate a Windows Server from AWS to Azure** is complete. Walkthrough: https://www.loom.com/share/8d2fbd4ae33b4ac6af3cfb42c0a76eee. Nothing is running.
 
 - Discovery, Variant A replication, a test migration, cutover, Complete migration, and teardown all ran. Protected / Healthy on 2026-11-01. Complete and teardown on 2026-11-02. Quota `L-1216C47A` was 8 at first apply, 16 when the appliance started, and 24.0 on 2026-11-02. Do not file another request.
 - Azure Site Recovery counts Windows cores, not vCPUs. `c5.2xlarge` and the Azure appliance sizes showed 4 cores and failed. `c5.4xlarge` showed 8 and passed. Variant B (`vm-repl`) failed that check and never copied a disk.
@@ -18,7 +18,7 @@ Azure projects 1 through 5 are complete, each with a recorded walkthrough. The s
 
 **Azure 8 and 9** (cost dashboard, backup system) are started as repos and are not the current recording focus.
 
-**Google Cloud 1–2** and **AWS 1** are in progress as second-cloud rebuilds of earlier ideas. They are not blocking Azure 6.
+**Google Cloud 1–2** and **AWS 1** are in progress as second-cloud rebuilds of earlier ideas. They are not blocking Azure 7.
 
 Standards now require: on the first running pass of every project, capture every screenshot that pass can prove before teardown; replace shots a later change makes wrong. Do not tear down a first pass only to rebuild for pictures.
 
@@ -42,7 +42,7 @@ The same ideas, in the same order and with the same tools, in every cloud. Numbe
 | 3 | A managed database whose password lives in a secret store, read by the VM's own identity | Python and the cloud SDK | [Complete](https://github.com/zsociety47/azure-sql-keyvault-poc) | Planned | Planned |
 | 4 | A network described in Terraform, with a firewall added to it after it is running | Terraform | [Complete](https://github.com/zsociety47/azure-terraform-iac-poc) | Planned | Planned |
 | 5 | Governance guardrails: allowed machine sizes, a read-only user, a budget | Terraform | [Complete](https://github.com/zsociety47/azure-governance-poc) | Planned | Planned |
-| 6 | Migrate a Windows Server into this cloud (Azure brings in AWS; later clouds bring in another provider) | Terraform plus the cloud migrate product | [Build finished](https://github.com/zsociety47/azure-aws-migrate-poc) — Variant A complete and torn down 2026-11-02; walkthrough not recorded | Planned | Planned |
+| 6 | Migrate a Windows Server into this cloud (Azure brings in AWS; later clouds bring in another provider) | Terraform plus the cloud migrate product | [Complete](https://github.com/zsociety47/azure-aws-migrate-poc) — [walkthrough](https://www.loom.com/share/8d2fbd4ae33b4ac6af3cfb42c0a76eee) | Planned | Planned |
 | 7 | A Terraform pipeline from GitHub with remote state and checks | Terraform in a pipeline | [In progress](https://github.com/zsociety47/azure-terraform-pipeline-poc) | Planned | Planned |
 
 Projects 6 and 7 work off each other over time. The pipeline tests and applies. The migration is a real workload that can eventually ride that pipeline. Each cloud's migration brings in a different cloud: the Azure set brings in AWS, the Google Cloud set brings in Azure, and the AWS set brings in Google Cloud. Together the three sets cover each other.
