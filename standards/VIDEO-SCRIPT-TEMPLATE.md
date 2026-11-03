@@ -57,3 +57,25 @@ List each filename from the README's commented-out image lines, and tick them of
 - [ ] Still frame and thumbnail made
 - [ ] README video link and thumbnail GIF updated; hub README row updated
 - [ ] LinkedIn post drafts written from this script
+
+## Before you record (from project 6, first take, Nov 3, 2026)
+
+Project 6 was recorded once, 16:48 long, and published as is. These are the misses to avoid on every later project.
+
+**Before pressing record**
+1. **Hard-refresh every tab** (Cmd+Shift+R) and confirm the page shows the finished text. Project 6 was recorded for 12 minutes from a README and a picture that were a day old, and they said the migration was not complete.
+2. **Open every screenshot you will show and look at its header.** Crop any email, directory name, subscription id, account id, or address. Check the old shots too, not only the new ones. Four early shots in project 6 showed the account email and were already public.
+3. **Move the camera bubble off the content.** In take 1 it covered part of the diagram and the bottom of the page.
+4. **Copy the numbers from the README, not from memory.** Project 6 said "10 CPUs" and "2 for the appliance" when the true figure was 18.
+
+**In the video**
+5. **Every promise in the intro gets its own row in the body.** The intro said two walls. Only one was explained.
+6. **Show the proof shots for each milestone** (here: core check, Protected and Healthy, test, cutover, complete). Do not read the success criteria table aloud.
+7. **Skip the setup steps that do not teach anything** (resource names, plan output). They took about 4 minutes. Link them instead.
+8. **One ending only.** No goodbye before the recap.
+9. **Say acronyms in full the first time**, aloud (VPC, WinRM, vCPU), and describe each service by what it is (a portal project is not a server).
+10. **Never claim a login or an application test unless the video shows it.**
+
+**After recording**
+11. Read the auto transcript for false or garbled claims, especially the limits in the outro, before posting.
+12. If the video is posted with a known error, put the correction in the description.
