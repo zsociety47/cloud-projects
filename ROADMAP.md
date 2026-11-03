@@ -4,16 +4,15 @@ Where this work is going. It changes as the work does.
 
 Every project here is a proof of concept (PoC): a stated hypothesis, success criteria, working infrastructure, automated deployment, and a recorded walkthrough. The projects are built on Azure first. Google Cloud and Amazon Web Services (AWS) follow as second and third passes that rebuild the same ideas. The rule for a rebuild is simple: the same idea, done again, has to be better than the last time.
 
-## Where we stand (October 2026)
+## Where we stand (November 2026)
 
 Azure projects 1 through 5 are complete, each with a recorded walkthrough. The shared Azure Terraform modules and the laptop pipeline foundation exist under `terraform/azure/`. The nightly environment sweep is in use.
 
-**Azure 6 — Migrate a Windows Server from AWS to Azure** is the active focus for screenshots and video.
+**Azure 6 — Migrate a Windows Server from AWS to Azure** is built and torn down. Record the Flow C walkthrough from the dated shots, the README, and the files. Nothing is running.
 
-- Discovery is proven: the AWS source was validated over Windows Remote Management (WinRM) on port 5985, discovery reached `DiscoveryStarted`, and the Migrate inventory showed one machine. Both clouds were torn down the same night.
-- Replication and cutover are not done. Variant A (replication appliance next to the source on AWS) needs Running On-Demand Standard virtual central processing units (vCPUs) quota `L-1216C47A` in `us-east-1` at least 10. The applied value is still 8. An open increase to 16 stays as filed; do not open a second request.
-- Variant B (replication appliance in Azure) is prepared as Terraform in `variant-b-appliance-in-azure/` and not applied. East US Total Regional vCPUs is 20. Standard DASv4 Family vCPUs is still 10, so discovery and the Azure replication machine cannot be allocated together until that family limit is at least 16. Deallocate discovery before applying variant B.
-- The next run follows path B while AWS stays at 8: apply source and discovery, take the discovery screenshots, deallocate discovery, apply variant B, record the walkthrough, tear down the same day. Say replication succeeded only if health is green.
+- Discovery, Variant A replication, a test migration, cutover, Complete migration, and teardown all ran. Protected / Healthy on 2026-11-01. Complete and teardown on 2026-11-02. Quota `L-1216C47A` was 8 at first apply, 16 when the appliance started, and 24.0 on 2026-11-02. Do not file another request.
+- Azure Site Recovery counts Windows cores, not vCPUs. `c5.2xlarge` and the Azure appliance sizes showed 4 cores and failed. `c5.4xlarge` showed 8 and passed. Variant B (`vm-repl`) failed that check and never copied a disk.
+- Do not rebuild for recording. Do not invent a login to the migrated server.
 
 **Azure 7 — Terraform from GitHub to Azure** is in progress in parallel. Shared modules and the foundation root are in this hub; the walkthrough repo is separate.
 
@@ -43,7 +42,7 @@ The same ideas, in the same order and with the same tools, in every cloud. Numbe
 | 3 | A managed database whose password lives in a secret store, read by the VM's own identity | Python and the cloud SDK | [Complete](https://github.com/zsociety47/azure-sql-keyvault-poc) | Planned | Planned |
 | 4 | A network described in Terraform, with a firewall added to it after it is running | Terraform | [Complete](https://github.com/zsociety47/azure-terraform-iac-poc) | Planned | Planned |
 | 5 | Governance guardrails: allowed machine sizes, a read-only user, a budget | Terraform | [Complete](https://github.com/zsociety47/azure-governance-poc) | Planned | Planned |
-| 6 | Migrate a Windows Server into this cloud (Azure brings in AWS; later clouds bring in another provider) | Terraform plus the cloud migrate product | [In progress](https://github.com/zsociety47/azure-aws-migrate-poc) — discovery proven; replication held on AWS vCPU quota; variant B prepared | Planned | Planned |
+| 6 | Migrate a Windows Server into this cloud (Azure brings in AWS; later clouds bring in another provider) | Terraform plus the cloud migrate product | [Build finished](https://github.com/zsociety47/azure-aws-migrate-poc) — Variant A complete and torn down 2026-11-02; walkthrough not recorded | Planned | Planned |
 | 7 | A Terraform pipeline from GitHub with remote state and checks | Terraform in a pipeline | [In progress](https://github.com/zsociety47/azure-terraform-pipeline-poc) | Planned | Planned |
 
 Projects 6 and 7 work off each other over time. The pipeline tests and applies. The migration is a real workload that can eventually ride that pipeline. Each cloud's migration brings in a different cloud: the Azure set brings in AWS, the Google Cloud set brings in Azure, and the AWS set brings in Google Cloud. Together the three sets cover each other.
