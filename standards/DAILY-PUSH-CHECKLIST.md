@@ -6,6 +6,8 @@ Nothing counts as saved until it is on GitHub. Run this at the start and the end
 
 In each repo below, run `git fetch` and `git status -sb`. If it says `behind`, run `git pull` first. If it says `ahead`, those commits were never pushed: push them before anything else.
 
+For each in-progress cloud project, run its existence check (`az group exists` for the project’s groups, or that repo’s `verify.sh`). If the README **Live** line, the Jira card, or the hub row disagrees with what printed, fix those in this session before other work. Do not leave a standing “already exists” sentence.
+
 ## The repos
 
 The folder is `~/Desktop/cloud-portfolio`. Project repos live in `azure/`, `gcp/`, or `aws/`. `cloud-projects` and `loom-notes` stay at the top.

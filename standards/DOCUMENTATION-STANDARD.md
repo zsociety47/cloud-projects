@@ -99,6 +99,19 @@ When a later change makes a shot show the wrong fact, replace that file and upda
 - Do not reconstruct the findings from memory at the end. Gotchas found during the build are the content that makes the project credible.
 - At the end of each phase, update the README step for that phase. Capture the screenshots that phase made possible before anything from that phase is destroyed. Mark any shot that is still impossible, and why.
 
+## 7d. Live Azure vs README
+
+The README must not freeze a live fact as a standing sentence. “The bootstrap already exists in Azure” and “`az group exists` now prints `false`” both go stale the next time apply or destroy runs.
+
+Write the **check** and both outcomes in the steps. Put the dated result in the success-criteria table (first-pass date plus a **Live** date). After every apply and every teardown, in that same session:
+
+1. Run the project’s existence check (`az group exists`, or `scripts/verify.sh`).
+2. Set the **Live** date and result to what that command printed.
+3. Make the Jira card, the hub README row, and the tracker match that same fact.
+4. Do not tick Jira box 4 (README and architecture) while the README and the last check disagree.
+
+Catch this before the next file, not at the end of the project.
+
 ## 7c. Compared with the previous project
 
 After the design lock of each new project, write a private comparison in `loom-notes/notes/compared-across-projects.md` and a short pointer in that project's `findings.md`. Cover:
@@ -130,7 +143,7 @@ Follow `standards/DIAGRAM-STANDARD.md`. Mermaid in the README. Diagrams show the
 A project is not done until all of these are true:
 - [ ] README follows the structure in section 4, with no placeholder text except the deliberate `LINKEDIN_LINK_HERE`
 - [ ] **Run this as yourself** lists every file a later operator must change, each as a relative link, and says which slot of the name to replace (`zeon01` → their short name and number)
-- [ ] Every success criterion has evidence and is checked ✅ only after verification
+- [ ] Every success criterion has evidence and is checked ✅ only after verification. The Result column has a first-pass date and a **Live** date that matches the last existence check in that session (section 7d).
 - [ ] A clean-slate test: the README's commands were followed from scratch (or by a fresh copy of the repo) and worked
 - [ ] Technical findings section is filled in from the running log
 - [ ] Screenshots from the first running pass are captured, redacted, and linked. A shot is deferred only when that pass could not show it, and the shot list says why. Shots replaced after a later change are the current files.
