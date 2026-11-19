@@ -89,7 +89,12 @@ azure_sweep() {
   command -v az >/dev/null || { say "azure: az not installed, skipping"; return; }
   az account show >/dev/null 2>&1 || { say "azure: not signed in (run az login), skipping"; return; }
   local json
-  json=$(az group list --tag lifetime=1d --query "[].{name:name, created:tags.created}" -o json)
+  # az account show passes from the cached login even when the token is blocked, so a
+  # failure here is real. Log a fixed line (the raw error carries tenant and trace ids).
+  if ! json=$(az group list --tag lifetime=1d --query "[].{name:name, created:tags.created}" -o json 2>/dev/null); then
+    warn "azure: could not list resource groups (sign-in blocked or expired). Nothing in Azure was swept. Run az login."
+    return 0
+  fi
   local count; count=$(python3 -c 'import json,sys; print(len(json.load(sys.stdin)))' <<<"$json")
   say "azure: $count resource group(s) tagged lifetime=1d"
   python3 -c 'import json,sys
@@ -109,8 +114,32 @@ for g in json.load(sys.stdin): print(g["name"] + "\t" + (g.get("created") or "")
   done
 }
 
+# The nightly job's PATH does not include a Cloud SDK installed under Downloads.
+add_gcloud_path() {
+  command -v gcloud >/dev/null 2>&1 && return 0
+  local candidate
+  for candidate in \
+    "$HOME/Downloads/google-cloud-sdk/bin/gcloud" \
+    "$HOME/google-cloud-sdk/bin/gcloud" \
+    "/opt/homebrew/share/google-cloud-sdk/bin/gcloud" \
+    "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/gcloud"
+  do
+    if [ -x "$candidate" ]; then
+      PATH="$(dirname "$candidate"):$PATH"
+      export PATH
+      return 0
+    fi
+    if [ -e "$candidate" ]; then
+      say "gcp: gcloud is installed, but this job cannot run it"
+      return 1
+    fi
+  done
+  say "gcp: gcloud not installed, skipping"
+  return 1
+}
+
 gcp_sweep() {
-  command -v gcloud >/dev/null || { say "gcp: gcloud not installed, skipping"; return; }
+  add_gcloud_path || return
   local active
   active=$(gcloud auth list --filter="status:ACTIVE" --format="value(account)" 2>/dev/null || true)
   [ -n "$active" ] || { say "gcp: not signed in (run gcloud auth login), skipping"; return; }
@@ -128,9 +157,15 @@ for p in json.load(sys.stdin):
     case "$verdict" in
       DELETE*)
         if $APPLY; then
-          gcloud projects delete "$name" --quiet >/dev/null 2>&1 \
-            && say "gcp: deleting project $name ($verdict)" \
-            || say "gcp: could not delete project $name ($verdict)"
+          if err=$(gcloud projects delete "$name" --quiet 2>&1); then
+            say "gcp: deleting project $name ($verdict)"
+          else
+            brief=$(printf '%s' "$err" | tr '\n' ' ' | sed -E \
+              -e 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+/[email]/g' \
+              -e 's/[0-9A-Fa-f]{6}-[0-9A-Fa-f]{6}-[0-9A-Fa-f]{6}/[billing]/g' \
+              -e 's/[0-9]{8,}/[number]/g' | cut -c1-180)
+            say "gcp: could not delete project $name ($verdict): $brief"
+          fi
         else
           say "gcp: would delete project $name ($verdict)"
         fi ;;
@@ -328,7 +363,10 @@ if ! $CHECK_ONLY; then
     azure) azure_sweep ;;
     gcp) gcp_sweep ;;
     aws) aws_sweep ;;
-    all) azure_sweep; gcp_sweep; aws_sweep ;;
+    all) # one cloud failing must not stop the others
+         azure_sweep || warn "azure: sweep stopped early"
+         gcp_sweep || warn "gcp: sweep stopped early"
+         aws_sweep || warn "aws: sweep stopped early" ;;
     *) echo "Unknown cloud: $CLOUD" >&2; exit 2 ;;
   esac
 fi

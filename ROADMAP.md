@@ -14,7 +14,7 @@ Azure projects 1 through 6 are complete, each with a recorded walkthrough. The s
 - Azure Site Recovery counts Windows cores, not vCPUs. `c5.2xlarge` and the Azure appliance sizes showed 4 cores and failed. `c5.4xlarge` showed 8 and passed. Variant B (`vm-repl`) failed that check and never copied a disk.
 - Do not rebuild for recording. Do not invent a login to the migrated server.
 
-**Azure 7 — Terraform from GitHub to Azure** is in progress in parallel. Shared modules and the foundation root are in this hub; the walkthrough repo is separate.
+**Azure 7 — Terraform from GitHub to Azure** is built and torn down (Oct 26); only the walkthrough recording is left. Shared modules and the foundation root are in this hub; the walkthrough repo is separate.
 
 **Azure 8 and 9** (cost dashboard, backup system) are started as repos and are not the current recording focus.
 

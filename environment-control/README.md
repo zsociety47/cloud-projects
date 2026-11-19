@@ -81,6 +81,8 @@ Log: `~/.environment-control/envctl.log`. Nothing it prints contains a subscript
 
 Run these on the Mac itself, not from Claude's cloud session (it can't reach macOS launchd or the Azure CLI). If the Mac is asleep at 11:30 PM, the job runs when it wakes. You must be signed in (`az login`); if you aren't, the run logs that and deletes nothing.
 
+macOS will not let that job read a script stored on the Desktop. The install copies `envctl.sh` into `~/.environment-control` and schedules that copy. Run `./install-launchd.sh` again after you change `envctl.sh`, or the night job keeps the old copy. The job's command path includes Homebrew, so `az` and `aws` are found there. It also adds the Google Cloud command-line interface when that install lives under `~/Downloads/google-cloud-sdk` or `~/google-cloud-sdk`. A failed delete is written to the log with the account email and billing account id removed.
+
 ## What it does not clean up, and the check that watches for it
 
 Deleting a resource group doesn't remove Entra users and app registrations, subscription-level policies and budgets, or the reserved names of soft-deleted Key Vaults. Only `terraform destroy` removes the first three.
