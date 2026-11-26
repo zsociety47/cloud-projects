@@ -38,7 +38,7 @@ Each of those folders has its own README. The walkthrough of building the Azure 
 
 Azure first, then the same ideas rebuilt on Google Cloud and Amazon Web Services (AWS), each one better than the last time. After that: a landing-zone series, a Kubernetes series, and more Azure projects. [Full roadmap](ROADMAP.md) — including **where we stand** on Azure 6 (Variant A completed, torn down, walkthrough recorded).
 
-**Now:** Azure 1–6 complete. Azure 7 is built and torn down (Oct 26); its walkthrough is the next recording. Shared Azure Terraform modules and the nightly environment sweep live in this hub.
+**Now:** Azure 1–6 complete. Azure 7 is live again (pipeline group recreated 26 Nov 2026, `verify.sh` 12 PASS); its walkthrough is the next recording. Shared Azure Terraform modules and the nightly environment sweep live in this hub.
 
 ---
 
@@ -52,7 +52,7 @@ Azure first, then the same ideas rebuilt on Google Cloud and Amazon Web Services
 | 4 | [Infrastructure as Code with Terraform on Azure](https://github.com/zsociety47/azure-terraform-iac-poc) | A virtual network can be described in Terraform, gain a firewall after it already exists, and be removed with one command | [Loom](https://www.loom.com/share/b0448fef104a4bdc90a3d7c63cad2014) | Complete |
 | 5 | [Governance guardrails on Azure](https://github.com/zsociety47/azure-governance-poc) | A reader is limited to one resource group, policy blocks an oversized virtual machine before it is created, and a budget alerts as spend nears the monthly limit | [Loom](https://www.loom.com/share/6f35ccb43dbb4a57b4905d501d9b9163) | Complete |
 | 6 | [Migrate a Windows Server from AWS to Azure](https://github.com/zsociety47/azure-aws-migrate-poc) | A Windows Server on AWS can be discovered, replicated, and cut over to Azure | [Loom](https://www.loom.com/share/8d2fbd4ae33b4ac6af3cfb42c0a76eee) | Complete |
-| 7 | [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc) | A pull request plans and tests a Terraform change, and only the main branch can apply it, with no Azure password stored in GitHub | Pending | Rebuilt 19 Nov 2026, verify 12 PASS; walkthrough pending |
+| 7 | [Terraform from GitHub to Azure](https://github.com/zsociety47/azure-terraform-pipeline-poc) | A pull request plans and tests a Terraform change, and only the main branch can apply it, with no Azure password stored in GitHub | Pending | Recreated pipeline group 26 Nov 2026, verify 12 PASS; walkthrough pending |
 | 8 | [Cost visibility dashboard](https://github.com/zsociety47/azure-cost-dashboard) | Spend by service and resource group is visible with a budget alert before the month is spent | Pending | In progress |
 | 9 | [Backup system](https://github.com/zsociety47/azure-backup-system) | Geo-redundant storage keeps previous versions and a 30-day soft delete, and an alert fires if a day passes with no writes | Pending | In progress |
 

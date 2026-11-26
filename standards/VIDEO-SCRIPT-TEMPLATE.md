@@ -54,6 +54,7 @@ List each filename from the README's commented-out image lines, and tick them of
 ## After recording
 - [ ] Check the intro: name, goal and business problem within the first 30 seconds
 - [ ] Watch once for exposed secrets, IDs or personal data; trim or re-record if any
+- [ ] **Peer review pack** (Cursor or Claude, not a full watch): Loom share URL or captions file, plus one still per script row, in `loom-notes/scripts/<project>/review/`. Score the communication-standard seven questions from the captions and public-safety from the stills. Do not ask the agent to watch the mp4 first.
 - [ ] Still frame and thumbnail made
 - [ ] README video link and thumbnail GIF updated; hub README row updated
 - [ ] LinkedIn post drafts written from this script
