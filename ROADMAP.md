@@ -6,7 +6,7 @@ Every project here is a proof of concept (PoC): a stated hypothesis, success cri
 
 ## Where we stand (November 2026)
 
-Azure projects 1 through 6 are complete, each with a recorded walkthrough. The shared Azure Terraform modules and the laptop pipeline foundation exist under `terraform/azure/`. The nightly environment sweep is in use.
+Azure projects 1 through 7 are built. Projects 1 through 6 each have a public walkthrough link. Azure 7 was recorded on 26 November 2026; the Loom URL is still pending. The shared Azure Terraform modules and the laptop pipeline foundation exist under `terraform/azure/`. The nightly environment sweep is in use.
 
 **Azure 6 — Migrate a Windows Server from AWS to Azure** is complete. Walkthrough: https://www.loom.com/share/8d2fbd4ae33b4ac6af3cfb42c0a76eee. Nothing is running.
 
@@ -14,11 +14,11 @@ Azure projects 1 through 6 are complete, each with a recorded walkthrough. The s
 - Azure Site Recovery counts Windows cores, not vCPUs. `c5.2xlarge` and the Azure appliance sizes showed 4 cores and failed. `c5.4xlarge` showed 8 and passed. Variant B (`vm-repl`) failed that check and never copied a disk.
 - Do not rebuild for recording. Do not invent a login to the migrated server.
 
-**Azure 7 — Terraform from GitHub to Azure** is built and torn down (Oct 26); only the walkthrough recording is left. Shared modules and the foundation root are in this hub; the walkthrough repo is separate.
+**Azure 7 — Terraform from GitHub to Azure** walkthrough recorded 26 November 2026. Loom URL pending. Click-through guide is live. Pipeline group recreated 26 November (`verify.sh` 12 PASS). Shared modules and the foundation root are in this hub; the walkthrough repo is separate.
 
-**Azure 8 and 9** (cost dashboard, backup system) are started as repos and are not the current recording focus.
+**Azure 8 and 9** (cost dashboard, backup system) are started as repos. Do not push `main` on either until apply.yml is gated.
 
-**Google Cloud 1–2** and **AWS 1** are in progress as second-cloud rebuilds of earlier ideas. They are not blocking Azure 7.
+**Google Cloud 1–2** and **AWS 1** are in progress as second-cloud rebuilds of earlier ideas.
 
 Standards now require: on the first running pass of every project, capture every screenshot that pass can prove before teardown; replace shots a later change makes wrong. Do not tear down a first pass only to rebuild for pictures.
 
